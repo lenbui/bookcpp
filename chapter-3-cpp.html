@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN – CƠ SỞ LẬP TRÌNH</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-4-cpp.html" rel="next">
+<link href="./chapter-2-cpp.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="theme.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-3-cpp.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mục lục</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Giới thiệu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-cpp.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">HÀM</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lý-thuyết" id="toc-lý-thuyết" class="nav-link active" data-scroll-target="#lý-thuyết"><span class="header-section-number">3.1</span> LÝ THUYẾT</a>
+  <ul class="collapse">
+  <li><a href="#cấu-trúc-một-chương-trình-c-đơn-giản" id="toc-cấu-trúc-một-chương-trình-c-đơn-giản" class="nav-link" data-scroll-target="#cấu-trúc-một-chương-trình-c-đơn-giản">Cấu trúc một chương trình C++ đơn giản</a></li>
+  <li><a href="#các-kiểu-dữ-liệu-cơ-bản-trong-c" id="toc-các-kiểu-dữ-liệu-cơ-bản-trong-c" class="nav-link" data-scroll-target="#các-kiểu-dữ-liệu-cơ-bản-trong-c">Các kiểu dữ liệu cơ bản trong C++</a></li>
+  <li><a href="#các-phép-toán" id="toc-các-phép-toán" class="nav-link" data-scroll-target="#các-phép-toán">Các phép toán</a></li>
+  <li><a href="#các-hàm-thư-viện-cơ-bản" id="toc-các-hàm-thư-viện-cơ-bản" class="nav-link" data-scroll-target="#các-hàm-thư-viện-cơ-bản">Các hàm thư viện cơ bản</a></li>
+  <li><a href="#cấu-trúc-tuần-tự" id="toc-cấu-trúc-tuần-tự" class="nav-link" data-scroll-target="#cấu-trúc-tuần-tự">Cấu trúc tuần tự</a></li>
+  <li><a href="#cấu-trúc-rẽ-nhánh" id="toc-cấu-trúc-rẽ-nhánh" class="nav-link" data-scroll-target="#cấu-trúc-rẽ-nhánh">Cấu trúc rẽ nhánh</a></li>
+  <li><a href="#cấu-trúc-lặp" id="toc-cấu-trúc-lặp" class="nav-link" data-scroll-target="#cấu-trúc-lặp">Cấu trúc lặp</a></li>
+  <li><a href="#cấu-trúc-nhảy" id="toc-cấu-trúc-nhảy" class="nav-link" data-scroll-target="#cấu-trúc-nhảy">Cấu trúc nhảy</a></li>
+  <li><a href="#thực-thi-chương-trình" id="toc-thực-thi-chương-trình" class="nav-link" data-scroll-target="#thực-thi-chương-trình">Thực thi chương trình</a></li>
+  </ul></li>
+  <li><a href="#bài-tập" id="toc-bài-tập" class="nav-link" data-scroll-target="#bài-tập"><span class="header-section-number">3.2</span> BÀI TẬP</a></li>
+  <li><a href="#tóm-tắt" id="toc-tóm-tắt" class="nav-link" data-scroll-target="#tóm-tắt"><span class="header-section-number">3.3</span> TÓM TẮT</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>C is quirky, flawed, and an enormous success.</p>
+<p>Dennis M. Ritchie</p>
+</blockquote>
+<p><em>Chương này trình bày các kiểu dữ liệu cơ bản và các phép toán tương ứng trong ngôn ngữ C++, các cấu trúc rẽ nhánh, lặp. Mô tả cách hoạt động và hướng dẫn chạy từng bước chương trình.</em></p>
+<section id="lý-thuyết" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="lý-thuyết"><span class="header-section-number">3.1</span> LÝ THUYẾT</h2>
+<section id="cấu-trúc-một-chương-trình-c-đơn-giản" class="level3">
+<h3 class="anchored" data-anchor-id="cấu-trúc-một-chương-trình-c-đơn-giản">Cấu trúc một chương trình C++ đơn giản</h3>
+<ul>
+<li>Khai báo thư viện</li>
+<li>Khai báo biến toàn cục</li>
+<li>Chương trình chính (<code>main</code>)</li>
+</ul>
+<div class="tcolorbox-proexample">
+<p>Một chương trình đơn giản</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Khai báo thư viện</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Khai báo biến toàn cục</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Chương trình chính</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Hello world!"</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="các-kiểu-dữ-liệu-cơ-bản-trong-c" class="level3">
+<h3 class="anchored" data-anchor-id="các-kiểu-dữ-liệu-cơ-bản-trong-c">Các kiểu dữ liệu cơ bản trong C++</h3>
+<section id="kiểu-số-nguyên" class="level4">
+<h4 class="anchored" data-anchor-id="kiểu-số-nguyên">Kiểu số nguyên</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tên kiểu</th>
+<th style="text-align: center;">kích thước (byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>char</code></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned char</code></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>int</code></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned int</code></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>long</code></td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned long</code></td>
+<td style="text-align: center;">8</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kiểu-số-thực" class="level4">
+<h4 class="anchored" data-anchor-id="kiểu-số-thực">Kiểu số thực</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tên kiểu</th>
+<th style="text-align: center;">kích thước (byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>float</code></td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>double</code></td>
+<td style="text-align: center;">8</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kiểu-ký-tự" class="level4">
+<h4 class="anchored" data-anchor-id="kiểu-ký-tự">Kiểu ký tự</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tên kiểu</th>
+<th style="text-align: center;">kích thước (byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>char</code></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>unsigned char</code></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="kiểu-luận-lý" class="level4">
+<h4 class="anchored" data-anchor-id="kiểu-luận-lý">Kiểu luận lý</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tên kiểu</th>
+<th style="text-align: center;">kích thước (byte)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>bool</code></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="các-phép-toán" class="level3">
+<h3 class="anchored" data-anchor-id="các-phép-toán">Các phép toán</h3>
+<section id="phép-toán-số-học" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-số-học">Phép toán số học</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Phép toán</th>
+<th style="text-align: center;">C++</th>
+<th style="text-align: center;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Cộng</td>
+<td style="text-align: center;"><code>+</code></td>
+<td style="text-align: center;"><code>a+b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Trừ</td>
+<td style="text-align: center;"><code>-</code></td>
+<td style="text-align: center;"><code>a-b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Nhân</td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><code>a*b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Chia</td>
+<td style="text-align: center;"><code>/</code></td>
+<td style="text-align: center;"><code>a/b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Dư</td>
+<td style="text-align: center;"><code>%</code></td>
+<td style="text-align: center;"><code>a%b</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phép-toán-so-sánh" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-so-sánh">phép toán so sánh</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Phép toán</th>
+<th style="text-align: center;">C++</th>
+<th style="text-align: center;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Lớn hơn</td>
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: center;"><code>a&gt;b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Nhỏ hơn</td>
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: center;"><code>a&lt;b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bằng</td>
+<td style="text-align: center;"><code>==</code></td>
+<td style="text-align: center;"><code>a==b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Khác</td>
+<td style="text-align: center;"><code>!=</code></td>
+<td style="text-align: center;"><code>a!=b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Lớn hơn hoặc bằng</td>
+<td style="text-align: center;"><code>&gt;=</code></td>
+<td style="text-align: center;"><code>a&gt;=b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Nhỏ hơn hoặc bằng</td>
+<td style="text-align: center;"><code>&lt;=</code></td>
+<td style="text-align: center;"><code>a&lt;=b</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phép-toán-logic" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-logic">phép toán logic</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Phép toán</th>
+<th style="text-align: left;">C++</th>
+<th style="text-align: left;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">phủ định</td>
+<td style="text-align: left;"><code>!</code></td>
+<td style="text-align: left;"><code>!a</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">và</td>
+<td style="text-align: left;"><code>&amp;&amp;</code></td>
+<td style="text-align: left;"><code>a&amp;&amp;b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">hay</td>
+<td style="text-align: left;"><code>||</code></td>
+<td style="text-align: left;"><code>a||b</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phép-toán-thao-tác-trên-bit" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-thao-tác-trên-bit">phép toán thao tác trên bit</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Phép toán</th>
+<th style="text-align: left;">C++</th>
+<th style="text-align: left;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">NOT</td>
+<td style="text-align: left;"><code>~</code></td>
+<td style="text-align: left;"><code>~a</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AND</td>
+<td style="text-align: left;"><code>&amp;</code></td>
+<td style="text-align: left;"><code>a&amp;b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OR</td>
+<td style="text-align: left;"><code>|</code></td>
+<td style="text-align: left;"><code>a|b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">XOR</td>
+<td style="text-align: left;"><code>^</code></td>
+<td style="text-align: left;"><code>a^b</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SHIFT LEFT</td>
+<td style="text-align: left;"><code>&lt;&lt;</code></td>
+<td style="text-align: left;"><code>a&lt;&lt;b</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">SHIFT RIGHT</td>
+<td style="text-align: left;"><code>&gt;&gt;</code></td>
+<td style="text-align: left;"><code>a&gt;&gt;b</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phép-toán-tăng-giảm" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-tăng-giảm">phép toán tăng giảm</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Phép toán</th>
+<th style="text-align: center;">C++</th>
+<th style="text-align: center;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Tăng biến một đơn vị</td>
+<td style="text-align: center;"><code>++</code></td>
+<td style="text-align: center;"><code>a++</code> hoặc <code>++a</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Giảm biến một đơn vị</td>
+<td style="text-align: center;"><code>--</code></td>
+<td style="text-align: center;"><code>a--</code> hoặc <code>--a</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="phép-toán-gán-và-gán-mở-rộng" class="level4">
+<h4 class="anchored" data-anchor-id="phép-toán-gán-và-gán-mở-rộng">phép toán gán và gán mở rộng</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Phép toán</th>
+<th style="text-align: center;">C++</th>
+<th style="text-align: center;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Gán biến một giá trị</td>
+<td style="text-align: center;"><code>=</code></td>
+<td style="text-align: center;"><code>a=b</code></td>
+</tr>
+</tbody>
+</table>
+<section id="toán-tử-điều-kiện" class="level5">
+<h5 class="anchored" data-anchor-id="toán-tử-điều-kiện">toán tử điều kiện</h5>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Phép toán</th>
+<th style="text-align: center;">C++</th>
+<th style="text-align: center;">Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">điều kiện</td>
+<td style="text-align: center;"><code>?:</code></td>
+<td style="text-align: center;"><code>a?b:c</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="độ-ưu-tiên-và-kết-hợp-của-các-toán-tử" class="level4">
+<h4 class="anchored" data-anchor-id="độ-ưu-tiên-và-kết-hợp-của-các-toán-tử">độ ưu tiên và kết hợp của các toán tử</h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Loại</th>
+<th style="text-align: center;">Toán tử</th>
+<th style="text-align: center;">Kết hợp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Postfix</td>
+<td style="text-align: center;"><code>() [] -&gt;. ++ --</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Unary</td>
+<td style="text-align: center;"><code>+ - ! ~ ++ -- (type)* &amp; sizeof</code></td>
+<td style="text-align: center;">phải sang trái</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Multiplicative</td>
+<td style="text-align: center;"><code>* / %</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Additive</td>
+<td style="text-align: center;"><code>+ -</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Shift</td>
+<td style="text-align: center;"><code>&lt;&lt; &gt;&gt;</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Relational</td>
+<td style="text-align: center;"><code>&lt; &lt;= &gt; &gt;=</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Equality</td>
+<td style="text-align: center;"><code>== !=</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Bitwise AND</td>
+<td style="text-align: center;"><code>&amp;</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Bitwise XOR</td>
+<td style="text-align: center;"><code>^</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Bitwise OR</td>
+<td style="text-align: center;"><code>|</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Logical AND</td>
+<td style="text-align: center;"><code>&amp;&amp;</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Logical OR</td>
+<td style="text-align: center;"><code>||</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Conditional</td>
+<td style="text-align: center;"><code>?:</code></td>
+<td style="text-align: center;">phải sang trái</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Assignment</td>
+<td style="text-align: center;"><code>= += -= *= /= %= &gt;&gt;= &lt;&lt;= &amp;= ^= |=</code></td>
+<td style="text-align: center;">phải sang trái</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Comma</td>
+<td style="text-align: center;"><code>,</code></td>
+<td style="text-align: center;">trái sang phải</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="các-hàm-thư-viện-cơ-bản" class="level3">
+<h3 class="anchored" data-anchor-id="các-hàm-thư-viện-cơ-bản">Các hàm thư viện cơ bản</h3>
+<section id="thư-viện-xuất-nhập-chuẩn-iostream" class="level4">
+<h4 class="anchored" data-anchor-id="thư-viện-xuất-nhập-chuẩn-iostream">Thư viện xuất nhập chuẩn <code>&lt;iostream&gt;</code></h4>
+</section>
+<section id="thư-viện-toán-học-cmath" class="level4">
+<h4 class="anchored" data-anchor-id="thư-viện-toán-học-cmath">Thư viện toán học <code>&lt;cmath&gt;</code></h4>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Tên hàm</th>
+<th style="text-align: center;">Ý nghĩa</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>abs(x)</code></td>
+<td style="text-align: center;"><span class="math inline">|a|</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>sin(x)</code></td>
+<td style="text-align: center;"><span class="math inline">sin(x)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>cos(x)</code></td>
+<td style="text-align: center;"><span class="math inline">cos(x)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pow(x,y)</code></td>
+<td style="text-align: center;"><span class="math inline">x^{y}</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>sqrt(x)</code></td>
+<td style="text-align: center;"><span class="math inline">\sqrt{x}</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>log(x)</code></td>
+<td style="text-align: center;"><span class="math inline">log(x)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>exp(x)</code></td>
+<td style="text-align: center;"><span class="math inline">e^{x}</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cấu-trúc-tuần-tự" class="level3">
+<h3 class="anchored" data-anchor-id="cấu-trúc-tuần-tự">Cấu trúc tuần tự</h3>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>⟨lệnh <span class="dv">1</span>⟩<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>⟨lệnh <span class="dv">2</span>⟩<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>⟨lệnh n⟩<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Các câu lệnh được thực hiện từ trên xuống, bắt đầu từ <code>⟨lệnh 1⟩</code>, <code>⟨lệnh 2⟩</code> và cuối cùng là <code>⟨lệnh n⟩</code></p>
+</div>
+<div class="tcolorbox-proexample">
+<p>Tính tổng hai số nguyên</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">,</span> b<span class="op">,</span> s<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap a va b = "</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> a <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"tong la = "</span> <span class="op">&lt;&lt;</span> s<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="cấu-trúc-rẽ-nhánh" class="level3">
+<h3 class="anchored" data-anchor-id="cấu-trúc-rẽ-nhánh">Cấu trúc rẽ nhánh</h3>
+<section id="câu-lệnh-if" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-if">Câu lệnh if</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>⟨biểu thức điều kiện⟩<span class="op">)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    ⟨khối lệnh⟩</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nếu <code>⟨biểu thức điều kiện⟩</code> đúng thì thực hiện <code>⟨khối lệnh⟩</code>. Lưu ý, <code>⟨biểu thức điều kiện⟩</code> phải được đặt trong cặp ngoặc</p>
+</div>
+<div class="tcolorbox-proexample">
+<p>Kiểm tra một số có lớn hơn 6</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> number<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap mot so trong khoang tu 1 den 10 = "</span><span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> number<span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>number <span class="op">&gt;</span> <span class="dv">6</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"So ban nhap lon hon 6."</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> number <span class="op">&lt;&lt;</span> <span class="st">" la so ban nhap."</span><span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="câu-lệnh-if-else" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-if-else">Câu lệnh if … else</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>⟨biểu thức điều kiện⟩<span class="op">)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    ⟨khối lệnh <span class="dv">1</span>⟩</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ⟨khối lệnh <span class="dv">2</span>⟩</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nếu <code>⟨biểu thức điều kiện⟩</code> cho kết quả đúng thì thực hiện <code>⟨khối lệnh 1⟩</code>, ngược lại thì cho thực hiện <code>⟨khối lệnh 2⟩</code>.</p>
+</div>
+<div class="tcolorbox-proexample">
+<p>Giải và biện luận phương trình <span class="math inline">ax+b=0</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> a<span class="op">,</span> b<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap vao a: "</span><span class="op">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> a<span class="op">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap vao b: "</span><span class="op">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> b<span class="op">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>b <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"Phuong trinh vo so nghiem"</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"Phuong trinh vo nghiem"</span><span class="op">;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"Nghiem phuong trinh x = "</span> <span class="op">&lt;&lt;</span> <span class="op">-</span>b <span class="op">/</span> a<span class="op">;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="câu-lệnh-switch" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-switch">Câu lệnh switch</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">switch</span> <span class="op">(</span>⟨biểu thức số⟩<span class="op">)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> ⟨n_1⟩<span class="op">:</span> ⟨các câu lệnh <span class="dv">1</span>⟩<span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> ⟨n_2⟩<span class="op">:</span> ⟨các câu lệnh <span class="dv">2</span>⟩<span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">case</span> ⟨n_k⟩<span class="op">:</span> ⟨các câu lệnh k⟩<span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span><span class="cf">default</span><span class="op">:</span> ⟨các câu lệnh k<span class="op">+</span><span class="dv">1</span>⟩<span class="op">;]</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Khi giá trị biểu thức bằng <span class="math inline">n_{i}</span> thì thực hiện câu lệnh sau <code>case ⟨n_i⟩</code>.</li>
+<li>Khi giá trị biểu thức không thỏa tất cả các <span class="math inline">n_{i}</span> thì thực hiện câu lệnh sau <code>default</code> nếu có, hoặc thoát khỏi câu lệnh <code>switch</code>.</li>
+<li>Khi chương trình đã thực hiện xong câu lệnh của <code>case ⟨n_i⟩</code> nào đó thì nó sẽ thực hiện luôn các lệnh thuộc <code>case</code> bên dưới nó mà không xét lại điều kiện (do các <code>n_i</code> được xem như các nhãn) Vì vậy, để chương trình thoát khỏi lệnh <code>switch</code> sau khi thực hiện xong một trường hợp, ta dùng lệnh <code>break</code>.</li>
+</ul>
+</div>
+<div class="tcolorbox-proexample">
+<p>Tạo thực đơn và cho phép chọn thực đơn bằng số nhập từ bàn phím.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> chon<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Thuc Don"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"1. Lau thai!"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"2. Nuoc ngot!"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"3. Ca loc hap bau!"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"4. Chuot dong!"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Xin moi ban chon mon an: "</span><span class="op">;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> chon<span class="op">;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> <span class="op">(</span>chon<span class="op">)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span> cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"Ban chon lau thai!"</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span> cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"Ban chon nuoc ngot!"</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span> cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"Ban chon ca loc hap bau!"</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">4</span><span class="op">:</span> cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"Ban chon chuot dong!"</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">default</span><span class="op">:</span> cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"Ban chon khong dung!"</span><span class="op">;</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="cấu-trúc-lặp" class="level3">
+<h3 class="anchored" data-anchor-id="cấu-trúc-lặp">Cấu trúc lặp</h3>
+<section id="câu-lệnh-for" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-for">Câu lệnh for</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span>⟨biểu thức <span class="dv">1</span>⟩<span class="op">;</span> ⟨biểu thức <span class="dv">2</span>⟩<span class="op">;</span> ⟨biểu thức <span class="dv">3</span>⟩<span class="op">)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    ⟨các câu lệnh⟩</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hoạt động của câu lệnh <code>for</code> như sau:</p>
+<ul>
+<li>Bước 1: Khởi gán cho <code>⟨biểu thức 1⟩</code></li>
+<li>Bước 2: Kiểm tra điều kiện của <code>⟨biểu thức 2⟩</code>
+<ul>
+<li>Nếu <code>⟨biểu thức 2⟩</code> đúng thì cho thực hiện <code>⟨các câu lệnh⟩</code> và thực hiện <code>⟨biểu thức 3⟩</code> rồi quay trở lại bước 2.</li>
+<li>Ngược lại thì thoát khỏi lặp.</li>
+</ul></li>
+<li>Bất kỳ biểu thức nào trong 3 biểu thức nói trên đều có thể vắng nhưng phải giữ dấu chấm phẩy (;)</li>
+</ul>
+</div>
+<div class="tcolorbox-proexample">
+<p>In ra màn hình bảng mã ASCII từ ký tự số 32 đến 255.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">32</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">255</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"Ma ASCII cua "</span> <span class="op">&lt;&lt;</span> <span class="op">(</span><span class="dt">char</span><span class="op">)</span>i <span class="op">&lt;&lt;</span> <span class="st">": "</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="câu-lệnh-while" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-while">Câu lệnh while</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(</span>⟨biểu thức điều kiện⟩<span class="op">)</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    ⟨các câu lệnh⟩</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nếu <code>⟨biểu thức điều kiện⟩</code> đúng thì thực hiện <code>⟨các câu lệnh⟩</code> và lặp điều này cho đến khi nào <code>⟨biểu thức điều kiện⟩</code> sai thì kết thúc</p>
+</div>
+<div class="tcolorbox-proexample">
+<p>In ra các chữ số của số nguyên <span class="math inline">n</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">,</span> chuso<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap vao n = "</span><span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> n<span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>n <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        chuso <span class="op">=</span> n <span class="op">%</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> chuso <span class="op">&lt;&lt;</span> <span class="st">" "</span><span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        n <span class="op">=</span> n <span class="op">/</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="câu-lệnh-do-while" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-do-while">Câu lệnh do … while</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    ⟨các câu lệnh⟩</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>⟨biểu thức điều kiện⟩<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Thực hiện khối lệnh cho đến khi <code>⟨biểu thức điều kiện⟩</code> có giá trị sai.</p>
+</div>
+<div class="tcolorbox-proexample">
+<p>Nhập ký tự từ bàn phím hiển thị lên màn hình mã ASCII của ký tự đó, thực hiện đến khi nhấn phím ESC (Mã ASCII của phím ESC là 27).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;conio.h&gt;</span><span class="pp"> </span><span class="co">// Lưu ý: conio.h không phải là thư viện chuẩn của C++</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ma<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhan mot phim bat ky (Nhan ESC de thoat):"</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        ma <span class="op">=</span> getch<span class="op">();</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>ma <span class="op">!=</span> <span class="dv">27</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"Ma ASCII "</span> <span class="op">&lt;&lt;</span> <span class="op">(</span><span class="dt">char</span><span class="op">)</span>ma <span class="op">&lt;&lt;</span> <span class="st">": "</span> <span class="op">&lt;&lt;</span> ma <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>ma <span class="op">!=</span> <span class="dv">27</span><span class="op">);</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-notice\*">
+<p>Lệnh lặp <code>while</code> kiểm tra điều kiện trước khi thực hiện lặp, còn lệnh lặp <code>do...while</code> thực hiện lệnh lặp rồi mới kiểm tra điều kiện. Do đó vòng lặp <code>do...while</code> thực hiện <code>⟨các câu lệnh⟩</code> ít nhất một lần.</p>
+</div>
+</section>
+<section id="câu-lệnh-break-và-continue" class="level4">
+<h4 class="anchored" data-anchor-id="câu-lệnh-break-và-continue">Câu lệnh break và continue</h4>
+<p>Lệnh <code>break</code> dùng để kết thúc vòng lặp trực tiếp chứa nó</p>
+<div class="tcolorbox-proexample">
+<p>Cho phép người dùng nhập liên tục giá trị <span class="math inline">n</span> cho đến khi nhập số âm thì dừng lại</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap n = "</span><span class="op">;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        cin <span class="op">&gt;&gt;</span> n<span class="op">;</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Lệnh <code>continue</code> dùng để bỏ qua một lần lặp.</p>
+<div class="tcolorbox-proexample">
+<p>In ra màn hình giá trị từ 1 đến 25 trừ đi số 14 và số 18.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">25</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">==</span> <span class="dv">14</span> <span class="op">||</span> i <span class="op">==</span> <span class="dv">18</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="cấu-trúc-nhảy" class="level3">
+<h3 class="anchored" data-anchor-id="cấu-trúc-nhảy">Cấu trúc nhảy</h3>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>⟨nhãn⟩<span class="op">:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">goto</span> ⟨nhãn⟩<span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>con trỏ lệnh sẽ được nhảy đến vị trị của <code>⟨nhãn⟩</code></p>
+</div>
+<div class="tcolorbox-proexample">
+<p>Kiểm tra một số nguyên là số dương, âm hay không?</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> n<span class="op">;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap vao so nguyen = "</span><span class="op">;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> n<span class="op">;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">goto</span> nhan1<span class="op">;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">goto</span> nhan2<span class="op">;</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">goto</span> nhan3<span class="op">;</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>nhan1<span class="op">:</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"so duong"</span><span class="op">;</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">goto</span> nhan<span class="op">;</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>nhan2<span class="op">:</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"so am"</span><span class="op">;</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">goto</span> nhan<span class="op">;</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>nhan3<span class="op">:</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"so khong"</span><span class="op">;</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>nhan<span class="op">:</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="thực-thi-chương-trình" class="level3">
+<h3 class="anchored" data-anchor-id="thực-thi-chương-trình">Thực thi chương trình</h3>
+<ul>
+<li>Xác định các biến trong chương trình.</li>
+<li>Giá trị ban đầu của mỗi biến.</li>
+<li>Thực hiện chạy chương trình theo đúng trình tự đã được viết</li>
+</ul>
+<div class="tcolorbox-proexample">
+<p>Cho biết kết quả của đoạn chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i<span class="op">,</span> a <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span>i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> a<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="bài-tập" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="bài-tập"><span class="header-section-number">3.2</span> BÀI TẬP</h2>
+<section id="bài-tập-cơ-bản" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-cơ-bản">Bài tập cơ bản</h4>
+</section>
+<section id="biến-biểu-thức-và-toán-tử" class="level4">
+<h4 class="anchored" data-anchor-id="biến-biểu-thức-và-toán-tử">Biến, biểu thức và toán tử</h4>
+<ol type="1">
+<li>Chuỗi ký tự nào sau đây không thể là tên biến được?</li>
+</ol>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>BASICSALARY</code></td>
+<td style="text-align: center;"><code>_basic</code></td>
+<td style="text-align: center;"><code>basic-hra</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>#MEAN</code></td>
+<td style="text-align: center;"><code>group.</code></td>
+<td style="text-align: center;"><code>422</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>population in 2006</code></td>
+<td style="text-align: center;"><code>over time</code></td>
+<td style="text-align: center;"><code>mindovermatter</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>FLOAT</code></td>
+<td style="text-align: center;"><code>hELLO</code></td>
+<td style="text-align: center;"><code>queue.</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>team'svictory</code></td>
+<td style="text-align: center;"><code>Plot # 3</code></td>
+<td style="text-align: center;"><code>2015_DDay</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>nhiệt</code></td>
+<td style="text-align: center;"><code>van_toc</code></td>
+<td style="text-align: center;"><code>lai suat</code></td>
+</tr>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li><p>Chỉ ra biểu thức C/C++ lỗi (nếu có)</p>
+<ol type="1">
+<li><code>int = 314.562 * 150;</code></li>
+<li><code>name = 'Ajay';</code></li>
+<li><code>varchar = '3';</code></li>
+<li><code>3.14 * r * r * h = vol_of_cyl;</code></li>
+<li><code>k = ( a * b ) ( c + ( 2.5a + b ) ( d + e );</code></li>
+<li><code>m_inst = rate of interest * amount in rs;</code></li>
+<li><code>si = principal * rateofinterest * numberofyears / 100;</code></li>
+<li><code>area = 3.14 * r ** 2;</code></li>
+<li><code>volume = 3.14 * r ^ 2 * h;</code></li>
+<li><code>k = ( (a * b ) + c ) ( 2.5 * a + b );</code></li>
+<li><code>a = b = 3 = 4;</code></li>
+<li><code>count = count + 1;</code></li>
+<li><code>date = '2 Mar 04';</code></li>
+</ol></li>
+<li><p>Xác định thứ tự thực hiện các phép toán và tính giá trị của biểu thức</p>
+<ol type="1">
+<li><code>g = big / 2 + big * 4 / big - big + abc / 3;</code> (<code>abc = 2.5</code>, <code>big = 2</code>, giả sử <span class="math inline">g</span> có kiểu <code>float</code>)</li>
+<li><code>on = ink * act / 2 + 3 / 2 * act + 2 + tig;</code> (<code>ink = 4</code>, <code>act = 1</code>, <code>tig = 3.2</code>, giả sử <code>on</code> có kiểu <code>int</code>)</li>
+<li><code>s = qui * add / 4 - 6 / 2 + 2 / 3 * 6 / god;</code> (<code>qui = 4</code>, <code>add = 2</code>, <code>god = 2</code>, giả sử <code>s</code> có kiểu <code>int</code>)</li>
+<li><code>s = 1 / 3 * a / 4 - 6 / 2 + 2 / 3 * 6 / g;</code> (<code>a = 4</code>, <code>g = 3</code>, giả sử <code>s</code> có kiểu <code>int</code>)</li>
+</ol></li>
+<li><p>Xác định toán hạng cho các phép toán trong biểu thức</p>
+<ol type="1">
+<li><code>g = 10 / 5 / 2 / 1;</code></li>
+<li><code>b = 3 / 2 + 5 * 4 / 3;</code></li>
+<li><code>a = b = c = 3 + 4;</code></li>
+</ol></li>
+<li><p>Chuyển các biểu thức toán sau sang ngôn ngữ C/C++ <span class="math display">A=\frac{\frac{8.8(a+b)2}{c}-0.5+\frac{2a}{q+r}}{\frac{a+b}{m}}</span> <span class="math display">B=\frac{-b+\sqrt{b^{2}-4ac}}{2a}</span> <span class="math display">C=\frac{2v+6.22(c+d)}{g+v}</span> <span class="math display">D=\frac{\frac{7.7b(xy+a)}{c}-0.8+2b}{\frac{x+a}{y}}</span></p></li>
+</ol>
+</section>
+<section id="cấu-trúc-rẽ-nhánh-1" class="level4">
+<h4 class="anchored" data-anchor-id="cấu-trúc-rẽ-nhánh-1">Cấu trúc rẽ nhánh</h4>
+<ol type="1">
+<li><p>Cho biết kết quả của đoạn chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">9</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    a<span class="op">++;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> a <span class="op">+</span> b<span class="op">--;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> a <span class="op">+</span> <span class="op">(--</span>b<span class="op">);</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"Gia tri cua a la chan"</span><span class="op">;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Tong cua a va b la: "</span> <span class="op">&lt;&lt;</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đoạn chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">7</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    a<span class="op">++;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> a <span class="op">+</span> <span class="op">(</span>b<span class="op">--);</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">--</span>b<span class="op">;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    a<span class="op">--;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> <span class="op">(--</span>a<span class="op">)</span> <span class="op">+</span> <span class="op">(--</span>b<span class="op">);</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>a <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"a la so le"</span><span class="op">;</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"a la so chan"</span><span class="op">;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> endl <span class="op">&lt;&lt;</span> <span class="st">"a = "</span> <span class="op">&lt;&lt;</span> a<span class="op">;</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đoạn chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x<span class="op">++</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"x="</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">", y="</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">*=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> y <span class="op">%</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"x="</span> <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> <span class="st">",y="</span> <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> <span class="st">",y/x="</span> <span class="op">&lt;&lt;</span> y <span class="op">/</span> x<span class="op">;</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Nhập vào hai số nguyên <span class="math inline">a,b</span>. In ra màn hình giá trị lớn nhất.</p></li>
+<li><p>Cho ba số <span class="math inline">a,b,c</span> đọc vào từ bàn phím. Hãy tìm giá trị lớn nhất của ba số trên và in ra kết quả.</p></li>
+<li><p>Cho ba số <span class="math inline">a,b,c</span> đọc vào từ bàn phím. Hãy in ra màn hình theo thứ tự tăng dần các số. (Chỉ được dùng thêm hai biến phụ).</p></li>
+<li><p>Viết chương trình nhập vào một số nguyên <span class="math inline">n</span> gồm ba chữ số. Xuất ra màn hình chữ số lớn nhất ở vị trí nào? Ví dụ: <code>n=291</code>. Chữ số lớn nhất nằm ở hàng chục là <code>9</code>.</p></li>
+<li><p>Viết chương trình nhập vào số nguyên <span class="math inline">n</span> gồm ba chữ số. Xuất ra màn hình theo thứ tự tăng dần của các chữ số. Ví dụ: <code>n=291</code>. Xuất ra <code>129</code>.</p></li>
+<li><p>Nhập vào ngày, tháng, năm. Kiểm tra xem ngày, tháng, năm đó có hợp lệ hay không? In kết quả ra màn hình.</p></li>
+<li><p>Nhập vào giờ, phút, giây. Kiểm tra xem giờ, phút, giây đó có hợp lệ hay không? In kết quả ra màn hình.</p></li>
+<li><p>Viết chương trình nhập vào ngày, tháng, năm hợp lệ. Cho biết năm này có phải là năm nhuận hay không? In kết quả ra màn hình.</p></li>
+<li><p>Viết chương trình tính diện tích và chu vi các hình: tam giác, hình vuông, hình chữ nhật và hình tròn với những thông tin cần được nhập từ bàn phím.</p></li>
+<li><p>Viết chương trình tính tiền cước TAXI. Biết rằng:</p>
+<ol type="1">
+<li><p>km đầu tiên giá là 5000đ</p></li>
+<li><p>200m tiếp theo là 1000đ.</p></li>
+<li><p>Nếu lớn hơn 30km thì mỗi km thêm sẽ là 3000đ</p></li>
+</ol>
+<p>Hãy nhập số km sau đó in ra số tiền phải trả.</p></li>
+<li><p>Nhập vào 3 số nguyên dương <span class="math inline">a,b,c</span>. Kiểm tra xem 3 số đó có lập thành tam giác không? Nếu có hãy cho biết tam giác đó thuộc loại nào? (cân, vuông, đều, …).</p></li>
+<li><p>Viết chương trình nhập vào số nguyên dương <span class="math inline">n</span>. Kiểm tra xem <span class="math inline">n</span> có phải là số chính phương hay không? (số chính phương là số khi lấy căn bặc 2 có kết quả là nguyên).</p></li>
+</ol>
+</section>
+<section id="cấu-trúc-lặp-1" class="level4">
+<h4 class="anchored" data-anchor-id="cấu-trúc-lặp-1">Cấu trúc lặp</h4>
+<ol type="1">
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">18</span><span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> a<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>a <span class="op">%</span> i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span> <span class="op">&lt;&lt;</span> i<span class="op">;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;=</span> i<span class="op">;</span> j<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> j <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>            s <span class="op">+=</span> i<span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>i <span class="op">&gt;</span> <span class="dv">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                s <span class="op">+=</span> <span class="dv">2</span> <span class="op">*</span> i<span class="op">;</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>            <span class="op">}</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        i<span class="op">--;</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"s = "</span> <span class="op">&lt;&lt;</span> s<span class="op">;</span></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">18</span><span class="op">,</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>a <span class="op">%</span> i <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span> <span class="op">&lt;&lt;</span> i<span class="op">;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>        i<span class="op">++;</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;=</span> a<span class="op">);</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">11</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">16</span><span class="op">,</span> i <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;</span> b<span class="op">)</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>            cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span> <span class="op">&lt;&lt;</span> i<span class="op">;</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>        i<span class="op">++;</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">&lt;</span> a<span class="op">)</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>        i<span class="op">++;</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span><span class="op">;</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>            s <span class="op">=</span> s <span class="op">+</span> i<span class="op">;</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"s="</span> <span class="op">&lt;&lt;</span> s<span class="op">;</span></span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Cho biết kết quả của đọan chương trình sau:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> s <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>        s <span class="op">=</span> s <span class="op">+</span> i<span class="op">++;</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>            i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>i <span class="op">&gt;</span> <span class="dv">20</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> s<span class="op">;</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Viết chương trình in ra màn hình hình chữ nhật đặc kích thước <span class="math inline">m\times n</span>. Ví dụ: Nhập <span class="math inline">m=5,n=4</span></p>
+<pre class="text"><code>* * * * 
+* * * * 
+* * * * 
+* * * * 
+* * * *</code></pre></li>
+<li><p>Viết chương trình in ra màn hình hình chữ nhật rỗng kích thước <span class="math inline">m\times n</span>. Ví dụ: Nhập <span class="math inline">m=5,n=4</span></p>
+<pre class="text"><code>* * * * 
+*     * 
+*     * 
+*     * 
+* * * *</code></pre></li>
+<li><p>Viết chương trình in ra màn hình tam giác vuông cân đặc có độ cao <span class="math inline">h</span>. Ví dụ: Nhập <span class="math inline">h=4</span></p>
+<pre class="text"><code>* 
+* * 
+* * * 
+* * * * </code></pre></li>
+<li><p>Viết chương trình in ra màn hình tam giác cân rỗng có độ cao <span class="math inline">h</span>. Ví dụ: Nhập <span class="math inline">h=4</span></p>
+<pre class="text"><code>* 
+* * 
+*   * 
+* * * * </code></pre></li>
+<li><p>Viết chương trình in ra màn hình tam giác cân đặc có độ cao <span class="math inline">h</span>. Ví dụ: Nhập <span class="math inline">h=4</span></p>
+<pre class="text"><code>      *
+    * * *
+  * * * * *
+* * * * * * * </code></pre></li>
+<li><p>Viết chương trình in ra màn hình tam giác cân rỗng có độ cao <span class="math inline">h</span>. Ví dụ: Nhập <span class="math inline">h=4</span></p>
+<pre class="text"><code>      *
+    *   *
+  *       *
+* * * * * * *</code></pre></li>
+<li><p>Viết chương trình nhập số nguyên dương <span class="math inline">n</span>. Liệt kê <span class="math inline">n</span> số nguyên tố đầu tiên.</p></li>
+<li><p>Viết chương trình nhập vào hai số nguyên dương <span class="math inline">a</span> và <span class="math inline">b</span>. Tìm ước số chung lớn nhất và bội số chung nhỏ nhất của <span class="math inline">a</span> và <span class="math inline">b</span>.</p></li>
+<li><p>Viết chương trình nhập vào một số nguyên <span class="math inline">n</span> gồm tối đa 10 chữ số (4 bytes). In ra màn hình giá trị nhị phân của số trên.</p></li>
+<li><p>Viết chương trình đếm số ước số của số nguyên dương <span class="math inline">n</span>. Ví dụ: <span class="math inline">n=12</span> số ước số của 12 là 6</p></li>
+<li><p>Một số hoàn thiện là một số có tổng các ước số của nó (không kể nó) bằng chính nó. Hãy liệt kê các số hoàn thiện nhỏ hơn 5000. Ví dụ: số 6 là số hòan thiện vì tổng các ước số là 1+2+3=6.</p></li>
+<li><p>Nhập vào ngày, tháng, năm. Cho biết đó là ngày thứ mấy trong năm.</p></li>
+<li><p>In ra dãy số Fibo <span class="math inline">f_{n}</span> <span class="math display">f_{n}=\begin{cases}
+1 &amp; n=1\\
+1 &amp; n=2\\
+f_{n-1}+f_{n-2} &amp; n&gt;2
+\end{cases}</span></p></li>
+</ol>
+</section>
+<section id="bài-tập-luyện-tập-và-nâng-cao" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-luyện-tập-và-nâng-cao">Bài tập luyện tập và nâng cao</h4>
+<ol type="1">
+<li><p>Cài đặt tất cả các lưu đồ đã vẽ ở chương 1.</p></li>
+<li><p>Nhập vào ngày, tháng, năm. Kiểm tra xem ngày, tháng, năm đó có hợp lệ hay không, nếu hợp lệ cho biết ngày sau đó là bao nhiêu. Ví dụ: Nhập 31/12/2003 Ngày sau đó 01/01/2004</p></li>
+<li><p>Nhập vào ngày, tháng, năm. Kiểm tra xem ngày, tháng, năm đó có hợp lệ hay không, nếu hợp lệ cho biết ngày trước đó là bao nhiêu. Ví dụ: Nhập 01/01/2003 Ngày trước đó 31/12/2002</p></li>
+<li><p>(*) Nhập vào ngày, tháng, năm của năm 2003. Hãy kiểm tra xem dữ liệu có hợp lệ hay không? Nếu hợp lệ hãy cho biết đó là ngày thứ mấy trong tuần. (hai, ba, tư, …, CN).(Hướng dẫn: lấy ngày 01 tháng 01 năm 2003 là ngày thứ tư làm mốc).</p></li>
+<li><p>Nhập vào giờ, phút, giây. Kiểm tra xem giờ, phút, giây đó có hợp lệ hay không, nếu hợp lệ cho biết giờ sau đó 1 giây là bao nhiêu. Ví dụ: Nhập 01:59:59 Giờ sau đó 1 giây 02:00:00</p></li>
+<li><p>Nhập vào giờ, phút, giây. Kiểm tra xem giờ, phút, giây đó có hợp lệ hay không, nếu hợp lệ cho biết giờ trước đó 1 giây là bao nhiêu. Ví dụ: Nhập 02:00:00 Giờ trước đó 1 giây 01:59:59</p></li>
+<li><p>Viết chương trình in ra bảng cửu chương từ 2 đến 9.</p></li>
+<li><p>(*) Vẽ hình cánh quạt sau với <span class="math inline">h</span> là chiều dài cánh quạt. Ví dụ <span class="math inline">h=4</span></p>
+<pre class="text"><code>*     * * * *
+* *   * * *    
+* * * * *
+* * * * * * *
+    * * * * * 
+  * * *   * *
+* * * *     *</code></pre></li>
+</ol>
+</section>
+</section>
+<section id="tóm-tắt" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="tóm-tắt"><span class="header-section-number">3.3</span> TÓM TẮT</h2>
+<p>Cấu trúc tuần tự, lặp và rẽ nhánh (lựa chọn) là ba cấu trúc chính hình thành nên chương trình. Dựa vào những cấu trúc điều khiển này ta có thể xây dựng thành những chương trình phức tạp hơn. Vì vậy phải nắm rõ cách hoạt động của những cấu trúc điều khiển này để cài đặt đúng yêu cầu bài toán. Khi sử dụng phải lưu ý điều kiện thực hiện hay kết thúc của một thao tác nào đó. Bên trong một phát biểu điều khiển phải là một lệnh hay một khối lệnh (khối lệnh được đặt bên trong cặp dấu ngoặc {}). Những biến không phụ thuộc vào vòng lặp nên đặt bên ngoài vòng lặp. Khi sử dụng cấu trúc điều khiển lồng nhau phải lưu ý vị trí mở ngoặc hay đóng ngoặc cho hợp lý.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-2-cpp.html" class="pagination-link" aria-label="LƯU ĐỒ THUẬT TOÁN">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-4-cpp.html" class="pagination-link" aria-label="HÀM">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">HÀM</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
