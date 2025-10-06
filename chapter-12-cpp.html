@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; LƯU ĐỒ THUẬT TOÁN – CƠ SỞ LẬP TRÌNH</title>
+<title>12&nbsp; LẬP TRÌNH ĐƠN THỂ – CƠ SỞ LẬP TRÌNH</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter-3-cpp.html" rel="next">
-<link href="./chapter-1-cpp.html" rel="prev">
+<link href="./chapter-11-cpp.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,49 +105,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="theme.css">
 </head>
@@ -127,7 +118,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-2-cpp.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-12-cpp.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -168,7 +159,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter-2-cpp.html" class="sidebar-item-text sidebar-link active">
+  <a href="./chapter-2-cpp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span></a>
   </div>
 </li>
@@ -228,7 +219,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter-12-cpp.html" class="sidebar-item-text sidebar-link">
+  <a href="./chapter-12-cpp.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></span></a>
   </div>
 </li>
@@ -242,16 +233,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#lý-thuyết" id="toc-lý-thuyết" class="nav-link active" data-scroll-target="#lý-thuyết"><span class="header-section-number">2.1</span> LÝ THUYẾT</a>
-  <ul class="collapse">
-  <li><a href="#khái-niệm" id="toc-khái-niệm" class="nav-link" data-scroll-target="#khái-niệm">Khái niệm</a></li>
-  <li><a href="#phần-mềm-công-cụ" id="toc-phần-mềm-công-cụ" class="nav-link" data-scroll-target="#phần-mềm-công-cụ">Phần mềm công cụ</a></li>
-  <li><a href="#các-ký-hiệu" id="toc-các-ký-hiệu" class="nav-link" data-scroll-target="#các-ký-hiệu">Các ký hiệu</a></li>
-  <li><a href="#phương-pháp-vẽ-và-thực-thi" id="toc-phương-pháp-vẽ-và-thực-thi" class="nav-link" data-scroll-target="#phương-pháp-vẽ-và-thực-thi">Phương pháp vẽ và thực thi</a></li>
-  <li><a href="#các-cấu-trúc-điều-khiển-cơ-bản" id="toc-các-cấu-trúc-điều-khiển-cơ-bản" class="nav-link" data-scroll-target="#các-cấu-trúc-điều-khiển-cơ-bản">Các cấu trúc điều khiển cơ bản</a></li>
-  </ul></li>
-  <li><a href="#bài-tập" id="toc-bài-tập" class="nav-link" data-scroll-target="#bài-tập"><span class="header-section-number">2.2</span> BÀI TẬP</a></li>
-  <li><a href="#tóm-tắt" id="toc-tóm-tắt" class="nav-link" data-scroll-target="#tóm-tắt"><span class="header-section-number">2.3</span> TÓM TẮT</a></li>
+  <li><a href="#lý-thuyết" id="toc-lý-thuyết" class="nav-link active" data-scroll-target="#lý-thuyết"><span class="header-section-number">12.1</span> LÝ THUYẾT</a></li>
+  <li><a href="#bài-tập" id="toc-bài-tập" class="nav-link" data-scroll-target="#bài-tập"><span class="header-section-number">12.2</span> BÀI TẬP</a></li>
+  <li><a href="#tóm-tắt" id="toc-tóm-tắt" class="nav-link" data-scroll-target="#tóm-tắt"><span class="header-section-number">12.3</span> TÓM TẮT</a></li>
   </ul>
 </nav>
     </div>
@@ -260,7 +244,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></h1>
 </div>
 
 
@@ -277,160 +261,186 @@ window.Quarto = {
 </header>
 
 
-<blockquote class="blockquote">
-<p>A picture is worth a thousand words</p>
-<p>thành ngữ</p>
-</blockquote>
-<p><em>Chương này sẽ trình bày các ký hiệu biểu diễn lưu đồ thuật toán, cách biểu diễn các cấu trúc điều khiển rẽ nhánh, cấu trúc lặp và các kỹ thuật liên quan đến lưu đồ thuật toán.</em></p>
-<section id="lý-thuyết" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="lý-thuyết"><span class="header-section-number">2.1</span> LÝ THUYẾT</h2>
-<section id="khái-niệm" class="level3">
-<h3 class="anchored" data-anchor-id="khái-niệm">Khái niệm</h3>
-<p>Lưu đồ thuật toán là công cụ đồ thị dùng để biểu diễn thuật toán, việc mô tả nhập dữ liệu và xuất dữ liệu và xử lý dữ liệu thông qua các ký hiệu hình học.</p>
-</section>
-<section id="phần-mềm-công-cụ" class="level3">
-<h3 class="anchored" data-anchor-id="phần-mềm-công-cụ">Phần mềm công cụ</h3>
-<p>Các công cụ để vẽ lưu đồ như</p>
+<p><em>Chương này sẽ giới thiệu về phương pháp lập trình đơn thể (modular programming), một kỹ thuật tổ chức mã nguồn hiệu quả để quản lý các dự án phần mềm phức tạp.</em></p>
+<section id="lý-thuyết" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="lý-thuyết"><span class="header-section-number">12.1</span> LÝ THUYẾT</h2>
+<section id="khái-niệm" class="level4">
+<h4 class="anchored" data-anchor-id="khái-niệm">Khái niệm</h4>
 <ul>
-<li>Drawio, Visio</li>
-<li>Flowchart có thể thực thi</li>
+<li><p><strong>Lập trình đơn thể</strong> là một phương pháp thiết kế phần mềm tập trung vào việc phân tách một chương trình thành các phần độc lập, có thể quản lý được, gọi là các <strong>đơn thể</strong> (modules). Mỗi đơn thể chứa đựng một tập hợp các hàm và dữ liệu liên quan để thực hiện một chức năng cụ thể và trọn vẹn.</p></li>
+<li><p>Thay vì viết toàn bộ mã nguồn vào một tệp lớn, chúng ta chia chương trình thành các tệp nhỏ hơn. Thông thường, một đơn thể bao gồm:</p>
+<ul>
+<li><strong>Tệp tiêu đề (Header File - <code>.h</code> hoặc <code>.hpp</code>):</strong> Đóng vai trò là “giao diện công khai” của đơn thể. Nó khai báo những gì mà đơn thể cung cấp cho các phần khác của chương trình, chẳng hạn như nguyên mẫu hàm, định nghĩa lớp, hằng số, và các kiểu dữ liệu.</li>
+<li><strong>Tệp mã nguồn (Source File - <code>.cpp</code>):</strong> Chứa phần “cài đặt chi tiết” của đơn thể. Nó định nghĩa và hiện thực hóa các chức năng đã được khai báo trong tệp tiêu đề.</li>
+</ul></li>
+<li><p>Việc phân chia này giúp quá trình lập trình trở nên dễ kiểm soát, dễ kiểm lỗi và bảo trì hơn. Nó cũng giúp tránh giới hạn về kích thước tệp của một số trình biên dịch cũ.</p></li>
+<li><p>Lập trình đơn thể liên quan chặt chẽ đến lập trình cấu trúc và lập trình hướng đối tượng, vì tất cả đều có chung mục tiêu là làm cho việc xây dựng các hệ thống phần mềm lớn trở nên khả thi hơn bằng cách phân rã chúng thành những thành phần nhỏ, dễ quản lý.</p></li>
 </ul>
 </section>
-<section id="các-ký-hiệu" class="level3">
-<h3 class="anchored" data-anchor-id="các-ký-hiệu">Các ký hiệu</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Lệnh</th>
-<th style="text-align: center;">Ký hiệu</th>
-<th style="text-align: center;">Lệnh</th>
-<th style="text-align: center;">Ký hiệu</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Assignment</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">For</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Call</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">If</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Comment</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Input</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Declare</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">Output</td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Do</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">While</td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="phương-pháp-vẽ-và-thực-thi" class="level3">
-<h3 class="anchored" data-anchor-id="phương-pháp-vẽ-và-thực-thi">Phương pháp vẽ và thực thi</h3>
+<section id="phương-pháp" class="level4">
+<h4 class="anchored" data-anchor-id="phương-pháp">Phương pháp</h4>
+<p>Quá trình thực hiện lập trình đơn thể trong C++ thường bao gồm các bước sau:</p>
+<p><strong>1. Thiết kế và Tách biệt Chức năng</strong></p>
 <ul>
-<li><p>Vẽ từ trên xuống</p></li>
-<li><p>Chạy bắt đầu từ <code>Main</code> và kết thúc tại <code>End</code></p></li>
-<li><p>Đi theo hướng mũi tên</p></li>
+<li>Xác định các chức năng chính của chương trình.</li>
+<li>Nhóm các hàm và dữ liệu có liên quan chặt chẽ vào cùng một đơn thể. Ví dụ: một chương trình máy tính có thể có các đơn thể như <code>PhepToanSoHoc</code>, <code>GiaoDienNguoiDung</code>, <code>LuuTruDuLieu</code>.</li>
+</ul>
+<p><strong>2. Tạo Tệp Tiêu đề (<code>.h</code>)</strong></p>
+<ul>
+<li>Tệp này chỉ chứa các <strong>khai báo</strong>, không chứa mã cài đặt chi tiết.</li>
+<li>Sử dụng <strong>bộ bảo vệ tiêu đề (header guards)</strong> để tránh lỗi “định nghĩa lại” khi một tệp tiêu đề được <code>#include</code> nhiều lần trong quá trình biên dịch.</li>
+</ul>
+<div class="tcolorbox-proexample">
+<p>Ví dụ về tệp <code>MathUtils.h</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// MathUtils.h</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef MATH_UTILS_H  </span><span class="co">// Nếu MATH_UTILS_H chưa được định nghĩa</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MATH_UTILS_H  </span><span class="co">// Thì định nghĩa nó</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Khai báo nguyên mẫu các hàm</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cong<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> tru<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif </span><span class="co">// Kết thúc bộ bảo vệ</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>3. Tạo Tệp Mã nguồn (<code>.cpp</code>)</strong></p>
+<ul>
+<li>Tệp này chứa phần cài đặt (định nghĩa) cho các hàm đã khai báo trong tệp tiêu đề tương ứng.</li>
+<li>Phải <code>#include</code> tệp tiêu đề của chính nó để trình biên dịch có thể kiểm tra sự nhất quán giữa khai báo và định nghĩa.</li>
+</ul>
+<div class="tcolorbox-proexample">
+<p>Ví dụ về tệp <code>MathUtils.cpp</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// MathUtils.cpp</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"MathUtils.h"</span><span class="pp"> </span><span class="co">// Include tệp tiêu đề tương ứng</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Định nghĩa (cài đặt) các hàm</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> cong<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> tru<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">-</span> b<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>4. Sử dụng Đơn thể trong Chương trình Chính</strong></p>
+<ul>
+<li>Tệp chứa hàm <code>main()</code> (hoặc một đơn thể khác) sẽ <code>#include</code> tệp tiêu đề của đơn thể mà nó muốn sử dụng.</li>
+<li>Lưu ý: Sử dụng dấu ngoặc kép <code>""</code> cho các tệp tiêu đề cục bộ của dự án và dấu ngoặc nhọn <code>&lt;&gt;</code> cho các thư viện hệ thống.</li>
+</ul>
+<div class="tcolorbox-proexample">
+<p>Ví dụ về tệp <code>main.cpp</code></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// main.cpp</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">"MathUtils.h"</span><span class="pp"> </span><span class="co">// Sử dụng đơn thể MathUtils</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> y <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Tong: "</span> <span class="op">&lt;&lt;</span> cong<span class="op">(</span>x<span class="op">,</span> y<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Hieu: "</span> <span class="op">&lt;&lt;</span> tru<span class="op">(</span>x<span class="op">,</span> y<span class="op">)</span> <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>5. Biên dịch và Liên kết (Compile and Link)</strong></p>
+<p>Đây là bước quan trọng nhất để hiểu cách các đơn thể hoạt động cùng nhau.</p>
+<ul>
+<li><strong>Biên dịch (Compilation):</strong> Mỗi tệp <code>.cpp</code> được biên dịch độc lập thành một <strong>tệp đối tượng (object file - <code>.o</code> hoặc <code>.obj</code>)</strong>. Tệp đối tượng chứa mã máy nhưng chưa phải là một chương trình hoàn chỉnh.</li>
+<li><strong>Liên kết (Linking):</strong> <strong>Trình liên kết (linker)</strong> sẽ kết hợp tất cả các tệp đối tượng (<code>main.o</code>, <code>MathUtils.o</code>, v.v.) và các thư viện cần thiết lại với nhau để tạo thành một tệp thực thi duy nhất (ví dụ: <code>my_program.exe</code>).</li>
+</ul>
+<div class="tcolorbox-usage">
+<p>Ví dụ biên dịch bằng g++ trên dòng lệnh:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bước 1: Biên dịch mỗi tệp .cpp thành tệp .o tương ứng</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">g++</span> <span class="at">-c</span> main.cpp <span class="at">-o</span> main.o</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">g++</span> <span class="at">-c</span> MathUtils.cpp <span class="at">-o</span> MathUtils.o</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Bước 2: Liên kết tất cả các tệp .o lại để tạo tệp thực thi</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">g++</span> main.o MathUtils.o <span class="at">-o</span> MyCalculator</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="lợi-ích-của-lập-trình-đơn-thể" class="level4">
+<h4 class="anchored" data-anchor-id="lợi-ích-của-lập-trình-đơn-thể">Lợi ích của Lập trình đơn thể</h4>
+<ul>
+<li><strong>Tái sử dụng mã (Code Reusability):</strong> Một đơn thể (ví dụ: <code>MathUtils</code>) có thể được sử dụng lại trong nhiều dự án khác nhau mà không cần viết lại mã.</li>
+<li><strong>Bảo trì dễ dàng (Easier Maintenance):</strong> Khi cần sửa lỗi hoặc cải thiện một chức năng, bạn chỉ cần chỉnh sửa tệp <code>.cpp</code> của đơn thể đó mà không ảnh hưởng đến các phần khác của chương trình, miễn là giao diện trong tệp <code>.h</code> không thay đổi.</li>
+<li><strong>Phát triển song song (Parallel Development):</strong> Các lập trình viên khác nhau có thể làm việc trên các đơn thể khác nhau cùng một lúc, giúp tăng tốc độ phát triển dự án.</li>
+<li><strong>Tính trừu tượng (Abstraction):</strong> Người sử dụng đơn thể chỉ cần biết <em>cần làm gì</em> (thông qua tệp <code>.h</code>), không cần biết <em>làm như thế nào</em> (chi tiết trong tệp <code>.cpp</code>).</li>
+<li><strong>Tổ chức và quản lý mã nguồn tốt hơn:</strong> Dự án được cấu trúc rõ ràng, giúp người mới dễ dàng tìm hiểu và tham gia.</li>
 </ul>
 </section>
-<section id="các-cấu-trúc-điều-khiển-cơ-bản" class="level3">
-<h3 class="anchored" data-anchor-id="các-cấu-trúc-điều-khiển-cơ-bản">Các cấu trúc điều khiển cơ bản</h3>
-<section id="cấu-trúc-tuần-tự" class="level4">
-<h4 class="anchored" data-anchor-id="cấu-trúc-tuần-tự">Cấu trúc tuần tự</h4>
-<p>Tuần tự thực thi tiến trình. Mỗi lệnh được thực thi theo một chuỗi từ trên xuống, xong lệnh này rồi chuyển xuống lệnh kế tiếp.</p>
-<div class="tcolorbox-proexample">
-<p>Nhập vào một số nguyên <span class="math inline">a</span> và xuất ra màn hình với giá trị tăng lên 1</p>
-</div>
 </section>
-<section id="cấu-trúc-rẽ-nhánh" class="level4">
-<h4 class="anchored" data-anchor-id="cấu-trúc-rẽ-nhánh">Cấu trúc rẽ nhánh</h4>
-<p>Điểm quyết định cho phép chọn một trong hai trường hợp đúng hay sai</p>
-<div class="tcolorbox-proexample">
-<p>Nhập vào số nguyên <span class="math inline">n</span>. Kiểm tra nếu <span class="math inline">n&gt;0</span> tăng <span class="math inline">n</span> lên 1 đơn vị</p>
-</div>
-</section>
-<section id="cấu-trúc-lặp" class="level4">
-<h4 class="anchored" data-anchor-id="cấu-trúc-lặp">Cấu trúc lặp</h4>
-<p>Thực hiện liên tục 1 lệnh hay tập lệnh với số lần lặp dựa vào điều kiện. Lặp sẽ kết thúc khi điều kiện được thỏa.</p>
-<div class="tcolorbox-proexample">
-<p>Nhập vào số nguyên <span class="math inline">n</span>. Xuất ra màn hình từ 1 đến <span class="math inline">n</span>.</p>
-</div>
-</section>
-<section id="các-ví-dụ-thực-hành" class="level4">
-<h4 class="anchored" data-anchor-id="các-ví-dụ-thực-hành">Các ví dụ thực hành</h4>
+<section id="bài-tập" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="bài-tập"><span class="header-section-number">12.2</span> BÀI TẬP</h2>
+<section id="bài-tập-1-quản-lý-chuỗi-ký-tự" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-1-quản-lý-chuỗi-ký-tự">Bài tập 1: Quản lý Chuỗi ký tự</h4>
+<p>Tạo một đơn thể <code>StringUtils</code> để thực hiện các thao tác trên chuỗi.</p>
 <ol type="1">
-<li><p>Giải và biện luận phương trình: <span class="math inline">ax+b=0</span>.</p></li>
-<li><p>Tính tổng: <span class="math inline">S(n)=1+2+3+\ldots+n</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính tổng: <span class="math inline">S(n)=\frac{1}{2}+\frac{2}{3}+\frac{3}{4}+\ldots+\frac{2n+1}{2n+2}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính tổng: <span class="math inline">S(n)=1-2+3-\ldots+(-1)^{n+1}n</span> với <span class="math inline">n&gt;0</span></p></li>
+<li><p><strong>Tệp <code>StringUtils.h</code>:</strong></p>
+<ul>
+<li>Khai báo hàm <code>int tinhChieuDai(const char* str);</code> để tính chiều dài chuỗi.</li>
+<li>Khai báo hàm <code>void daoNguocChuoi(char* str);</code> để đảo ngược một chuỗi.</li>
+</ul></li>
+<li><p><strong>Tệp <code>StringUtils.cpp</code>:</strong></p>
+<ul>
+<li>Cài đặt hai hàm đã khai báo ở trên.</li>
+</ul></li>
+<li><p><strong>Tệp <code>main.cpp</code>:</strong></p>
+<ul>
+<li><code>#include "StringUtils.h"</code>.</li>
+<li>Tạo một chuỗi, ví dụ <code>char myName[] = "Hello";</code>.</li>
+<li>Gọi hàm <code>tinhChieuDai</code> để in ra chiều dài của chuỗi.</li>
+<li>Gọi hàm <code>daoNguocChuoi</code> để đảo ngược chuỗi và in kết quả ra màn hình.</li>
+</ul></li>
+</ol>
+</section>
+<section id="bài-tập-2-quản-lý-mảng" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-2-quản-lý-mảng">Bài tập 2: Quản lý Mảng</h4>
+<p>Tạo một đơn thể <code>ArrayUtils</code> để xử lý mảng số nguyên.</p>
+<ol type="1">
+<li><p><strong>Tệp <code>ArrayUtils.h</code>:</strong></p>
+<ul>
+<li>Khai báo hàm <code>void inMang(const int arr[], int size);</code></li>
+<li>Khai báo hàm <code>int timGiaTriLonNhat(const int arr[], int size);</code></li>
+<li>Khai báo hàm <code>void sapXepTangDan(int arr[], int size);</code></li>
+</ul></li>
+<li><p><strong>Tệp <code>ArrayUtils.cpp</code>:</strong></p>
+<ul>
+<li>Cài đặt các hàm trên. Hàm sắp xếp có thể dùng thuật toán đơn giản như Bubble Sort.</li>
+</ul></li>
+<li><p><strong>Tệp <code>main.cpp</code>:</strong></p>
+<ul>
+<li><code>#include "ArrayUtils.h"</code>.</li>
+<li>Khởi tạo một mảng số nguyên.</li>
+<li>Sử dụng các hàm từ <code>ArrayUtils</code> để in mảng, tìm giá trị lớn nhất, sắp xếp mảng và in lại mảng sau khi sắp xếp.</li>
+</ul></li>
+</ol>
+</section>
+<section id="bài-tập-3-quản-lý-sinh-viên" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-3-quản-lý-sinh-viên">Bài tập 3: Quản lý Sinh viên</h4>
+<p>Tạo một đơn thể để quản lý thông tin cơ bản của sinh viên.</p>
+<ol type="1">
+<li><p><strong>Tệp <code>SinhVien.h</code>:</strong></p>
+<ul>
+<li>Định nghĩa một cấu trúc <code>struct SinhVien { char hoTen[50]; float diemTB; };</code>.</li>
+<li>Khai báo hàm <code>void nhapThongTin(SinhVien&amp; sv);</code></li>
+<li>Khai báo hàm <code>void xuatThongTin(const SinhVien&amp; sv);</code></li>
+</ul></li>
+<li><p><strong>Tệp <code>SinhVien.cpp</code>:</strong></p>
+<ul>
+<li>Cài đặt hai hàm trên. Hàm nhập sẽ yêu cầu người dùng nhập họ tên và điểm trung bình từ bàn phím.</li>
+</ul></li>
+<li><p><strong>Tệp <code>main.cpp</code>:</strong></p>
+<ul>
+<li><code>#include "SinhVien.h"</code>.</li>
+<li>Khai báo một biến kiểu <code>SinhVien</code>.</li>
+<li>Gọi hàm <code>nhapThongTin</code> và sau đó là <code>xuatThongTin</code> để hiển thị lại thông tin vừa nhập.</li>
+</ul></li>
 </ol>
 </section>
 </section>
-</section>
-<section id="bài-tập" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="bài-tập"><span class="header-section-number">2.2</span> BÀI TẬP</h2>
-<section id="bài-tập-cơ-bản" class="level4">
-<h4 class="anchored" data-anchor-id="bài-tập-cơ-bản">Bài tập cơ bản</h4>
-<ol type="1">
-<li><p>Nhập vào hai số <span class="math inline">x,y</span>. Xuất ra màn hình tổng, hiệu, tích, thương của hai số trên.</p></li>
-<li><p>Nhập vào số nguyên <span class="math inline">n</span>, kiểm tra xem <span class="math inline">n</span> chẵn hay lẻ và xuất ra màn hình.</p></li>
-<li><p>Nhập vào ba cạnh <span class="math inline">a,b,c</span> của tam giác. Xuất ra màn hình tam giác đó thuộc loại tam giác gì? (thường, cân, vuông, đều hay vuông cân).</p></li>
-<li><p>Nhập vào số nguyên <span class="math inline">n</span>. Xuất <span class="math inline">n</span> ra màn hình (nếu <span class="math inline">n</span> chẵn thì gấp đôi giá trị).</p></li>
-<li><p>Nhập vào số nguyên <span class="math inline">n</span>. Nếu <span class="math inline">n&gt;5</span> thì tăng <span class="math inline">n</span> lên 2 đơn vị và trả về giá trị <span class="math inline">n</span>, ngược lại trả về giá trị 0.</p></li>
-<li><p>Tính <span class="math inline">n!</span>, với <span class="math inline">n\geq0</span></p></li>
-<li><p>Tính <span class="math inline">P(n)=1.3.5...(2n+1)</span>, với <span class="math inline">n\geq0</span></p></li>
-<li><p>Tính <span class="math inline">S(n)=1+3+5+...+(2n+1)</span>, với <span class="math inline">n\geq0</span></p></li>
-<li><p>Tính <span class="math inline">S(n)=1-2+3-4+...+(-1)^{n+1}n</span>, với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math inline">S(n)=1+1.2+1.2.3+...+1.2.3...n</span>, với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math inline">S(n)=1^{2}+2^{2}+3^{2}+...+n^{2}</span>, với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math display">S(n)=1+\frac{1}{2}+\frac{1}{3}+...+\frac{1}{n}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>(*) Tính <span class="math display">S(n)=1+\frac{1}{1+2}+\frac{1}{1+2+3}+...+\frac{1}{1+2+3+...+n}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math inline">P(x,y)=x^{y}</span></p></li>
-<li><p>Tính <span class="math inline">S(n)=1+(1+2)+(1+2+3)+...+(1+2+3+...+n)</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Cho số nguyên <span class="math inline">n</span>. Tính trị tuyệt đối của <span class="math inline">n</span>.</p></li>
-<li><p>Cho số nguyên dương <span class="math inline">n</span> gồm <span class="math inline">k</span> chữ số. Tìm chữ số có giá trị lớn nhất.</p></li>
-<li><p>Đếm số lượng ước số chẵn của số nguyên dương <span class="math inline">n</span>.</p></li>
-<li><p>In ra chữ số đầu tiên của số nguyên dương <span class="math inline">n</span> gồm <span class="math inline">k</span> chữ số.</p></li>
-<li><p>Cho 2 số nguyên dương <span class="math inline">a,b</span>. Tìm USCLN của <span class="math inline">a</span> và <span class="math inline">b</span>.</p></li>
-<li><p>Cho 2 số nguyên dương <span class="math inline">a,b</span>. Tìm BSCNN của <span class="math inline">a</span> và <span class="math inline">b</span>.</p></li>
-<li><p>Cho số nguyên dương <span class="math inline">x</span>. Kiểm tra xem <span class="math inline">x</span> có phải là số nguyên tố không?</p></li>
-<li><p>Cho số nguyên dương <span class="math inline">x</span>. Kiểm tra <span class="math inline">x</span> có phải là số chính phương không?</p></li>
-<li><p>Cho số nguyên dương <span class="math inline">x</span>. Kiểm tra xem <span class="math inline">x</span> có phải là số hoàn thiện không?</p></li>
-</ol>
-</section>
-<section id="bài-tập-luyện-tập-và-nâng-cao" class="level4">
-<h4 class="anchored" data-anchor-id="bài-tập-luyện-tập-và-nâng-cao">Bài tập luyện tập và nâng cao</h4>
-<ol type="1">
-<li><p>Tính <span class="math inline">S(n)=1+2^{2}+3^{3}+...+n^{n}</span>, với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math display">S(n)=\frac{1}{2}+\frac{2}{3}+...+\frac{n}{n+1}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math display">S(n)=1+\frac{1}{2!}+\frac{1}{3!}+\ldots.+\frac{1}{n!}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Tính <span class="math display">S(n)=1+\frac{1+2}{2!}+\frac{1+2+3}{3!}+\ldots.+\frac{1+2+3+...+n}{n!}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>Giải và biện luận phương trình bậc hai <span class="math inline">ax^{2}+bx+c=0</span></p></li>
-<li><p>Giải và biện luận phương trình trùng phương bậc bốn <span class="math inline">ax^{4}+bx^{2}+c=0</span></p></li>
-<li><p>(*) Tính <span class="math inline">S(n)=\sqrt{n+\sqrt{n-1+\sqrt{n-2+...+\sqrt{1}}}}</span> với <span class="math inline">n&gt;0</span></p></li>
-<li><p>(**) Tính <span class="math inline">S(n)=\sqrt{1+\sqrt{2+\sqrt{3+...+\sqrt{n}}}}</span> với <span class="math inline">n&gt;0</span></p></li>
-</ol>
-</section>
-</section>
-<section id="tóm-tắt" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="tóm-tắt"><span class="header-section-number">2.3</span> TÓM TẮT</h2>
-<p>Lưu đồ thuật toán rất là một công cụ hữu ích trong việc mô tả cách giải quyết của một bài toán. Việc mô tả này rất trực quan thông qua các ký hiệu hình học, đây là giai đoạn đầu tiên trước khi bắt tay vào lập trình trên một ngôn ngữ lập trình cụ thể. Khi xây dựng lưu đồ thuật toán, chúng ta cần chú ý một vài điểm sau: Một lưu đồ phải có điểm bắt đầu và điểm kết thúc. Phải có dữ liệu vào, dữ liệu ra sau khi xử lý tính toán. Tại mỗi vị trí quyết định lựa chọn rẽ nhánh phải ghi rõ điều kiện đúng hoặc sai thì đi theo nhánh nào.</p>
+<section id="tóm-tắt" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="tóm-tắt"><span class="header-section-number">12.3</span> TÓM TẮT</h2>
+<p>Lập trình đơn thể là một kỹ thuật thiết yếu để tổ chức các dự án phần mềm. Bằng cách chia chương trình thành các đơn thể độc lập—mỗi đơn thể gồm một tệp tiêu đề <code>.h</code> cho giao diện và một tệp mã nguồn <code>.cpp</code> cho việc cài đặt—chúng ta có thể xây dựng các hệ thống dễ bảo trì, dễ mở rộng và cho phép tái sử dụng mã nguồn hiệu quả. Quá trình biên dịch và liên kết riêng biệt chính là cơ chế kỹ thuật cho phép các đơn thể này hoạt động hài hòa với nhau để tạo thành một chương trình hoàn chỉnh.</p>
 
 
 </section>
@@ -838,14 +848,11 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./chapter-1-cpp.html" class="pagination-link" aria-label="CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></span>
+      <a href="./chapter-11-cpp.html" class="pagination-link" aria-label="KỸ THUẬT ĐỆ QUI">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">KỸ THUẬT ĐỆ QUI</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter-3-cpp.html" class="pagination-link" aria-label="KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.24">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; KIỂU DỮ LIỆU MẢNG MỘT CHIỀU – CƠ SỞ LẬP TRÌNH</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter-6-cpp.html" rel="next">
+<link href="./chapter-4-cpp.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dc55a5b9e770e841cd82e46aadbfb9b0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-d9ea66fcd6c317012447f26e9c021348.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="theme.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-5-cpp.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG MỘT CHIỀU</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mục lục</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Giới thiệu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">HÀM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-cpp.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG MỘT CHIỀU</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CHUỖI KÝ TỰ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG HAI CHIỀU</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CẤU TRÚC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU TẬP TIN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CON TRỎ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">KỸ THUẬT ĐỆ QUI</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-12-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#lý-thuyết" id="toc-lý-thuyết" class="nav-link active" data-scroll-target="#lý-thuyết"><span class="header-section-number">5.1</span> LÝ THUYẾT</a></li>
+  <li><a href="#bài-tập" id="toc-bài-tập" class="nav-link" data-scroll-target="#bài-tập"><span class="header-section-number">5.2</span> BÀI TẬP</a></li>
+  <li><a href="#tóm-tắt" id="toc-tóm-tắt" class="nav-link" data-scroll-target="#tóm-tắt"><span class="header-section-number">5.3</span> TÓM TẮT</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG MỘT CHIỀU</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Chương này trình bày trình bày dữ liệu kiểu mảng, các thao tác nhập xuất, các kỹ thuật thao tác trên mảng. Ứng dụng các kỹ thuật này trong việc cài đặt các hàm tìm kiếm, kiểm tra, xây dựng mảng, tách và ghép mảng.</em></p>
+<section id="lý-thuyết" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="lý-thuyết"><span class="header-section-number">5.1</span> LÝ THUYẾT</h2>
+<div class="tcolorbox-defn">
+<p>mảng một chiều là tập hợp các phần tử được lưu trữ liên tục và các phần tử của mảng phải cùng kiểu dữ liệu.</p>
+</div>
+<section id="khai-báo-biến-mảng" class="level4">
+<h4 class="anchored" data-anchor-id="khai-báo-biến-mảng">Khai báo biến mảng</h4>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>⟨Kiểu dữ liệu⟩ ⟨Tên mảng⟩ <span class="op">[</span>⟨Số phần tử tối đa của mảng⟩<span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Khai báo mảng <code>a</code> có 100 số nguyên và mảng <code>b</code> có 50 số thực</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> a<span class="op">[</span><span class="dv">100</span><span class="op">];</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> b<span class="op">[</span><span class="dv">50</span><span class="op">];</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="truy-xuất-phần-tử-của-mảng" class="level4">
+<h4 class="anchored" data-anchor-id="truy-xuất-phần-tử-của-mảng">Truy xuất phần tử của mảng</h4>
+<p>Với khái niệm và cách khai báo như trên ta có hình dạng của mảng một chiều như sau:</p>
+<div class="tcolorbox-syntax">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>⟨Tên mảng⟩<span class="op">[</span>⟨Chỉ số⟩<span class="op">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Khởi tạo và xuất mảng một chiều</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">[</span><span class="dv">4</span><span class="op">]</span> <span class="op">=</span> <span class="op">{</span><span class="dv">5</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">8</span><span class="op">};</span> </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">4</span><span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"a["</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">"] = "</span> <span class="op">&lt;&lt;</span> a<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="bài-tập" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="bài-tập"><span class="header-section-number">5.2</span> BÀI TẬP</h2>
+<section id="kỹ-thuật-nhập-xuất-mảng-một-chiều" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-nhập-xuất-mảng-một-chiều">Kỹ thuật nhập xuất mảng một chiều</h4>
+<div class="tcolorbox-proexample">
+<p>Viết chương trình nhập xuất mảng một chiều các số nguyên.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX </span><span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> NhapMang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">)</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"Nhap so phan tu: "</span><span class="op">;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> n<span class="op">;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> <span class="st">"a["</span> <span class="op">&lt;&lt;</span> i <span class="op">&lt;&lt;</span> <span class="st">"] = "</span><span class="op">;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        cin <span class="op">&gt;&gt;</span> a<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> XuatMang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    cout <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Noi dung mang: "</span><span class="op">;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        cout <span class="op">&lt;&lt;</span> a<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span><span class="op">;</span> </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">[</span>MAX<span class="op">],</span> n<span class="op">;</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    NhapMang<span class="op">(</span>a<span class="op">,</span> n<span class="op">);</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    XuatMang<span class="op">(</span>a<span class="op">,</span> n<span class="op">);</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết chương trình nhập xuất mảng một chiều các số thực.</p></li>
+<li><p>Viết chương trình khởi tạo giá trị các phần tử là 0 cho mảng một chiều các số nguyên gồm n phần tử.</p></li>
+<li><p>Viết chương trình phát sinh ngẫu nhiên mảng một chiều các số nguyên âm.</p></li>
+<li><p>Viết chương trình phát sinh ngẫu nhiên mảng một chiều các số nguyên sao cho mảng có thứ tự tăng dần (không sắp xếp).</p></li>
+<li><p>Viết chương trình nhập mảng các số thực và xuất các phần tử âm trong mảng.</p></li>
+<li><p>Viết chương trình nhập mảng các số nguyên và xuất các phần tử lẻ có trong mảng.</p></li>
+<li><p>Viết chương trình nhập vào mảng một chiều các số nguyên và xuất ra các phần tử chẵn nhỏ hơn 20.</p></li>
+<li><p>Viết chương trình nhập vào mảng một chiều các số nguyên và xuất ra màn hình các phần tử là số nguyên tố.</p></li>
+<li><p>Viết chương trình nhập vào số nguyên <span class="math inline">n</span> và liệt kê các số nguyên tố nhỏ hơn <span class="math inline">n</span>, nếu mảng không tồn tại số nguyên tố nào nhỏ hơn <span class="math inline">n</span> thì phải xuất ra một câu thông báo.</p></li>
+<li><p>Viết chương trình nhập vào mảng một chiều các số nguyên và xuất ra màn hình các phần tử là số chính phương nằm tại những vị trí lẻ trong mảng.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-đặt-cờ-hiệu" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-đặt-cờ-hiệu">Kỹ thuật đặt cờ hiệu</h4>
+<p>Kỹ thuật này thường được áp dụng cho những bài toán kiểm tra hay đánh dấu.</p>
+<div class="tcolorbox-proexample">
+<p>Viết hàm kiểm tra xem mảng các số nguyên có thứ tự tăng dần không? (Trả về 1: Nếu mảng tăng dần, ngược lại trả về 0).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> KiemTraTang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> flag <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">&gt;</span> a<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">])</span> <span class="co">// vi phạm điều kiện tăng dần</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            flag <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span> </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> flag<span class="op">;</span> </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Viết hàm kiểm tra xem trong mảng các số nguyên có tồn tại số nguyên lẻ lớn hơn 100 hay không? (Trả về 1: Nếu có tồn tại số lẻ và lớn hơn 100, ngược lại trả về 0).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> KiemTraLe<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> flag <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">!=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> a<span class="op">[</span>i<span class="op">]</span> <span class="op">&gt;</span> <span class="dv">100</span><span class="op">)</span> <span class="co">// Gặp phần tử thoả</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span> </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>            flag <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span> </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> flag<span class="op">;</span> </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="kỹ-thuật-đặt-lính-canh" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-đặt-lính-canh">Kỹ thuật đặt lính canh</h4>
+<p>Kỹ thuật này thường được áp dụng cho những bài tập về tìm kiếm, liệt kê theo một điều kiện nhất định nào đó.</p>
+<div class="tcolorbox-proexample">
+<p>Viết hàm tìm và trả về giá trị lớn nhất trong mảng một chiều các số nguyên.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> TimMax<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> max <span class="op">=</span> a<span class="op">[</span><span class="dv">0</span><span class="op">];</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">&gt;</span> max<span class="op">)</span> </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            max <span class="op">=</span> a<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> max<span class="op">;</span> </span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="kỹ-thuật-tìm-kiếm-trên-mảng-một-chiều" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-tìm-kiếm-trên-mảng-một-chiều">Kỹ thuật tìm kiếm trên mảng một chiều</h4>
+<div class="tcolorbox-proexample">
+<p>Viết hàm tìm phần tử có giá trị <span class="math inline">x</span> xuất hiện đầu tiên trong mảng một chiều. (Nếu tìm thấy trả về vị trí xuất hiện <span class="math inline">x</span>, ngược lại trả về -1)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> TimX<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> x<span class="op">)</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>x <span class="op">==</span> a<span class="op">[</span>i<span class="op">])</span> </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> i<span class="op">;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm tìm vị trí phần tử có giá trị <span class="math inline">x</span> xuất hiện cuối cùng trong mảng.</p></li>
+<li><p>Viết hàm tìm vị trí của phần tử nhỏ nhất trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tìm vị trí của phần tử lớn nhất trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm in vị trí các phần tử nguyên tố trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm in vị trí các phần tử nguyên tố lớn hơn 23.</p></li>
+<li><p>Viết hàm tìm vị trí phần tử âm đầu tiên trong mảng. Nếu không có phần tử âm trả về -1.</p></li>
+<li><p>Viết hàm tìm vị trí phần tử âm lớn nhất trong mảng.</p></li>
+<li><p>Viết hàm tìm vị trí phần tử dương đầu tiên trong mảng. Nếu không có phần tử âm trả về -1.</p></li>
+<li><p>Viết hàm tìm vị trí phần tử dương bé nhất trong mảng.</p></li>
+<li><p>Viết hàm in các phần tử là bội của 3 và 5.</p></li>
+<li><p>Viết hàm tìm số chẵn cuối cùng có trong mảng, nếu không tồn tại số chẵn hàm trả về -1.</p></li>
+<li><p>Viết hàm tìm số lẻ lớn nhất có trong mảng, n ếu không tồn tại số lẻ hàm trả về -1.</p></li>
+<li><p>Viết hàm tìm và đổi chỗ phần tử lớn nhất với phần tử nhỏ nhất trong mảng.</p></li>
+<li><p>Nhập vào <span class="math inline">x</span>. Viết hàm in ra màn hình những phần tử có giá trị từ 1 đến <span class="math inline">x</span> có trong mảng.</p></li>
+<li><p>Viết chương trình nhập vào một dãy số <span class="math inline">a</span> gồm <span class="math inline">n</span> số thực và dãy số <span class="math inline">b</span> gồm <span class="math inline">m</span> số thực (<span class="math inline">m,n\leq100</span>).</p>
+<ol type="1">
+<li><p>In ra những phần tử chỉ xuất hiện trong dãy <span class="math inline">a</span> mà không xuất hiện trong dãy <span class="math inline">b</span>.</p></li>
+<li><p>In ra những phần tử xuất hiện ở cả hai dãy.</p></li>
+</ol></li>
+</ol>
+</section>
+<section id="kỹ-thuật-đếm-phần-tử---tần-suất" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-đếm-phần-tử---tần-suất">Kỹ thuật đếm phần tử - tần suất</h4>
+<div class="tcolorbox-proexample">
+<p>Viết hàm đếm các phần tử chia hết cho 5 trong mảng các số nguyên.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> Dem<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> dem <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            dem<span class="op">++;</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dem<span class="op">;</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm đếm các phần tử âm, dương trong mảng.</p></li>
+<li><p>Viết hàm đếm các phần tử chẵn, lẻ trong mảng.</p></li>
+<li><p>Viết hàm đếm số lần xuất hiện của phần tử <span class="math inline">x</span> trong mảng.</p></li>
+<li><p>Viết hàm đếm các phần tử nhỏ hơn <span class="math inline">x</span> trong mảng.</p></li>
+<li><p>Viết hàm đếm các phần tử là số nguyên tố trong mảng.</p></li>
+<li><p>Viết hàm đếm các phần tử là số hoàn thiện trong mảng.</p></li>
+<li><p>Viết hàm đếm các phần tử là bội của 3 và 5 trong mảng các số nguyên.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-tính-tổng---trung-bình" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-tính-tổng---trung-bình">Kỹ thuật tính tổng - trung bình</h4>
+<div class="tcolorbox-proexample">
+<p>Viết hàm tính tổng các phần tử trong mảng.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> TinhTong<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tong <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        tong <span class="op">=</span> tong <span class="op">+</span> a<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tong<span class="op">;</span> </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Viết hàm tính giá trị trung bình các phần tử có giá trị âm trong mảng. Đối với hàm tính trung bình có điều kiện phải lưu ý khi chia giá trị (có thể mảng không có phần tử nào thoả điều kiện, nếu ta chia tức là chia cho 0).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">float</span> TinhTrungBinhAm<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tong <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> spt <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span> </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>            tong <span class="op">=</span> tong <span class="op">+</span> a<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>            spt<span class="op">++;</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>spt <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">(</span><span class="dt">float</span><span class="op">)</span>tong <span class="op">/</span> spt<span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm tính tổng các phần tử chẵn trong mảng.</p></li>
+<li><p>Viết hàm tính tổng các phần tử lẻ trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tính tổng các phần tử nguyên tố trong mảng.</p></li>
+<li><p>Viết hàm tính tổng các phần tử nằm ở vị trí chẵn trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tính tổng các phần tử nằm ở vị trí nguyên tố trong mảng.</p></li>
+<li><p>Viết hàm tính tổng các phần tử chia hết cho 5 có trong mảng.</p></li>
+<li><p>Viết hàm tính tổng các phần tử cực đại trong mảng các số nguyên (phần tử cực đại là phần tử lớn hơn các phần tử xung quanh nó). Ví dụ: 1 <strong>5</strong> 2 <strong>6</strong> 3 <strong>5</strong> 1 <strong>8</strong> 6</p></li>
+<li><p>Viết hàm tính tổng các phần tử cực tiểu trong mảng các số nguyên (phần tử cực tiểu là phần tử nhỏ hơn các phần tử xung quanh nó). Ví dụ: 6 4 <strong>2</strong> 9 5 <strong>3</strong> 7 <strong>1</strong> 5 8</p></li>
+<li><p>Viết hàm tính tổng các phần tử là bội của 3 và 5 trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tính tổng các phần tử là số hoàn thiện trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tính giá trị trung bình của các số hoàn thiện trong mảng các số nguyên.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-sắp-xếp" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-sắp-xếp">Kỹ thuật sắp xếp</h4>
+<div class="tcolorbox-proexample">
+<p>Viết hàm sắp xếp mảng theo thứ tự tăng dần.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> HoanVi<span class="op">(</span><span class="dt">int</span> <span class="op">&amp;</span>a<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>b<span class="op">)</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tam <span class="op">=</span> a<span class="op">;</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> b<span class="op">;</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> tam<span class="op">;</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> SapTang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">)</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;</span> n<span class="op">;</span> j<span class="op">++)</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>a<span class="op">[</span>i<span class="op">]</span> <span class="op">&gt;</span> a<span class="op">[</span>j<span class="op">])</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                HoanVi<span class="op">(</span>a<span class="op">[</span>i<span class="op">],</span> a<span class="op">[</span>j<span class="op">]);</span> </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm sắp xếp mảng theo thứ tự giảm dần.</p></li>
+<li><p>Viết hàm sắp xếp mảng theo thứ tự tăng dần của các phần tử là số nguyên tố.</p></li>
+<li><p>Viết hàm sắp xếp các phần tử lẻ tăng dần.</p></li>
+<li><p>Viết hàm sắp xếp các phần tử chẵn giảm dần.</p></li>
+<li><p>Viết hàm sắp xếp các phần tử chẵn nằm bên trái theo thứ tự tăng dần còn các phần tử lẻ bên phải theo thứ tự giảm dần.</p></li>
+<li><p>Viết hàm sắp xếp các phần tử âm giảm dần từ trái sang phải, phần tử dương tăng dần từ phải sang trái.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-xoá-phần-tử" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-xoá-phần-tử">Kỹ thuật xoá phần tử</h4>
+<p>Duyệt mảng từ trái sang phải. Xuất phát từ vị trí cần xoá tiến hành dời lần lượt các phần tử về phía trước cho đến khi kết thúc mảng, sau đó giảm kích thước mảng. Vấn đề đặt ra là tìm vị trí cần xóa theo điều kiện bài toán rồi thực hiện xóa.</p>
+<div class="tcolorbox-proexample">
+<p>Viết hàm xoá phần tử đầu tiên của mảng.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> XoaDau<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">)</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>        a<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">];</span> </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    n<span class="op">--;</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Viết hàm xoá phần tử tại vị trí <code>vitri</code> cho trước trong mảng.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> XoaTaiViTri<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">,</span> <span class="dt">int</span> vitri<span class="op">)</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> vitri<span class="op">;</span> i <span class="op">&lt;</span> n <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        a<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">+</span><span class="dv">1</span><span class="op">];</span> </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    n<span class="op">--;</span> </span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm xoá phần tử tại vị trí lẻ trong mảng.</p></li>
+<li><p>Viết hàm xoá phần tử có giá trị lớn nhất trong mảng.</p></li>
+<li><p>Nhập vào giá trị <span class="math inline">x</span>. Viết hàm xoá tất cả các phần tử có giá trị nhỏ hơn <span class="math inline">x</span>.</p></li>
+<li><p>Nhập vào giá trị <span class="math inline">x</span>. Viết hàm xoá phần tử có giá trị gần <span class="math inline">x</span> nhất.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-thêmchèn-phần-tử" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-thêmchèn-phần-tử">Kỹ thuật thêm/chèn phần tử</h4>
+<p>Duyệt mảng từ phải sang trái. Xuất phát từ cuối mảng tiến hành đẩy lần lượt các phần tử về phía sau cho đến vị trí cần chèn, chèn phần tử cần chèn vào vị trí chèn và tăng kích thước mảng. Trước khi chèn ta phải xác định vị trí cần chèn theo điều kiện bài toán.</p>
+<div class="tcolorbox-proexample">
+<p>Thêm phần tử có giá trị <span class="math inline">x</span> vào cuối mảng.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> ChenCuoi<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">,</span> <span class="dt">int</span> x<span class="op">)</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span>n<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    n<span class="op">++;</span> </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Chèn phần tử có giá trị <span class="math inline">x</span> vào mảng tại vị trí (<code>vitri</code>) cho trước</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> ChenTaiViTri<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">,</span> <span class="dt">int</span> x<span class="op">,</span> <span class="dt">int</span> vitri<span class="op">)</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> n<span class="op">;</span> i <span class="op">&gt;</span> vitri<span class="op">;</span> i<span class="op">--)</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        a<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">-</span><span class="dv">1</span><span class="op">];</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    a<span class="op">[</span>vitri<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    n<span class="op">++;</span> </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết hàm chèn phần tử có giá trị <span class="math inline">x</span> vào vị trí đầu tiên của mảng.</p></li>
+<li><p>Viết hàm chèn phần tử có giá trị <span class="math inline">x</span> vào phía sau phần tử có giá trị lớn nhất trong mảng.</p></li>
+<li><p>Viết hàm chèn phần tử có giá trị <span class="math inline">x</span> vào trước phần tử có giá trị là số nguyên tố đầu tiên trong mảng.</p></li>
+<li><p>Viết hàm chèn phần tử có giá trị <span class="math inline">x</span> vào phía sau tất cả các phần tử có giá trị chẵn trong mảng.</p></li>
+</ol>
+</section>
+<section id="kỹ-thuật-tách-và-ghép-mảng" class="level4">
+<h4 class="anchored" data-anchor-id="kỹ-thuật-tách-và-ghép-mảng">Kỹ thuật tách và ghép mảng</h4>
+<div class="tcolorbox-proexample">
+<p>Cho mảng <span class="math inline">a</span> kích thước <span class="math inline">n</span> (n chẵn). Tách mảng <span class="math inline">a</span> thành 2 mảng <span class="math inline">b</span> và <span class="math inline">c</span> sao cho: <span class="math inline">b</span> có một nửa số phần tử đầu của mảng <span class="math inline">a</span>, một nửa số phần tử còn lại đưa vào mảng <span class="math inline">c</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> TachMang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> b<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>m<span class="op">,</span> <span class="dt">int</span> c<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>l<span class="op">)</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> k <span class="op">=</span> n <span class="op">/</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> l <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> k<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>        b<span class="op">[</span>m<span class="op">++]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> k<span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        c<span class="op">[</span>l<span class="op">++]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Cho 2 mảng số nguyên <span class="math inline">a</span> và <span class="math inline">b</span> kích thước lần lượt là <span class="math inline">n</span> và <span class="math inline">m</span>. Viết chương trình nối mảng <span class="math inline">b</span> vào cuối mảng <span class="math inline">a</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> GhepMang<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>n<span class="op">,</span> <span class="dt">int</span> b<span class="op">[],</span> <span class="dt">int</span> m<span class="op">)</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> i<span class="op">++)</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        a<span class="op">[</span>n <span class="op">+</span> i<span class="op">]</span> <span class="op">=</span> b<span class="op">[</span>i<span class="op">];</span> </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> n <span class="op">+</span> m<span class="op">;</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="tcolorbox-proexample">
+<p>Cho 2 mảng số nguyên <span class="math inline">a</span> và <span class="math inline">b</span> kích thước lần lượt là <span class="math inline">n</span> và <span class="math inline">m</span>. Viết chương trình nối xen kẻ (đan xen) lần lượt các phần tử mảng <span class="math inline">a</span> và <span class="math inline">b</span> vào mảng <span class="math inline">c</span>.</p>
+<p>Đưa lần lượt từng phần tử của mảng <span class="math inline">a</span> và mảng <span class="math inline">b</span> vào mảng <span class="math inline">c</span>, tăng chỉ số tương ứng. Nếu một trong hai mảng hết trước thì chép tất cả các phần tử còn lại của mảng chưa hết vào mảng <span class="math inline">c</span>. Đặt <span class="math inline">i</span> là chỉ số của mảng <span class="math inline">a</span>; <span class="math inline">j</span>: chỉ số của mảng <span class="math inline">b</span> và <span class="math inline">k</span> là chỉ số của mảng <span class="math inline">c</span>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> GhepMangXenKe<span class="op">(</span><span class="dt">int</span> a<span class="op">[],</span> <span class="dt">int</span> n<span class="op">,</span> <span class="dt">int</span> b<span class="op">[],</span> <span class="dt">int</span> m<span class="op">,</span> <span class="dt">int</span> c<span class="op">[],</span> <span class="dt">int</span> <span class="op">&amp;</span>k<span class="op">)</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    k <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>i <span class="op">&lt;</span> n <span class="op">&amp;&amp;</span> j <span class="op">&lt;</span> m<span class="op">)</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        c<span class="op">[</span>k<span class="op">++]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">++];</span> </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        c<span class="op">[</span>k<span class="op">++]</span> <span class="op">=</span> b<span class="op">[</span>j<span class="op">++];</span> </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>i <span class="op">&lt;</span> n<span class="op">)</span> </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        c<span class="op">[</span>k<span class="op">++]</span> <span class="op">=</span> a<span class="op">[</span>i<span class="op">++];</span> </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>j <span class="op">&lt;</span> m<span class="op">)</span> </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        c<span class="op">[</span>k<span class="op">++]</span> <span class="op">=</span> b<span class="op">[</span>j<span class="op">++];</span> </span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol type="1">
+<li><p>Viết chương trình tách 1 mảng các số nguyên thành 2 mảng <span class="math inline">a</span> và <span class="math inline">b</span>, sao cho mảng <span class="math inline">a</span> chứa toàn số lẻ và mảng <span class="math inline">b</span> chứa toàn số chẵn. Ví dụ: mảng ban đầu: 1 3 8 2 7 5 9 0 10 thì mảng <span class="math inline">a</span>: 1 3 7 5 9 và mảng <span class="math inline">b</span>: 8 2 10</p></li>
+<li><p>Cho 2 mảng số nguyên <span class="math inline">a</span> và <span class="math inline">b</span> kích thước lần lượt là <span class="math inline">n</span> và <span class="math inline">m</span>. Viết chương trình nối 2 mảng trên thành mảng <span class="math inline">c</span> theo nguyên tắc chẵn ở đầu mảng và lẻ ở cuối mảng. Ví dụ: mảng <span class="math inline">a</span>: 3 2 7 5 9 và mảng <span class="math inline">b</span>: 1 8 10 4 12 6 thì mảng <span class="math inline">c</span>: 6 12 4 10 2 8 3 1 7 5 9</p></li>
+</ol>
+</section>
+<section id="bài-tập-luyện-tập-và-nâng-cao" class="level4">
+<h4 class="anchored" data-anchor-id="bài-tập-luyện-tập-và-nâng-cao">Bài tập luyện tập và nâng cao</h4>
+<ol type="1">
+<li><p>Viết chương trình nhập vào mảng <span class="math inline">A</span> gồm <span class="math inline">n</span> phần tử, trong quá trình nhập kiểm tra các phần tử nhập vào không được trùng, nếu trùng thông báo và yêu cầu nhập lại.</p></li>
+<li><p>Viết hàm tính tổng của từng dãy con giảm có trong mảng.</p></li>
+<li><p>(*) Cho mảng các số nguyên <span class="math inline">a</span> gồm <span class="math inline">n</span> phần tử (<span class="math inline">n\leq30000</span>) và số dương <span class="math inline">k\leq n</span>. Hãy chỉ ra số hạng lớn thứ <span class="math inline">k</span> của mảng. Ví dụ: mảng <span class="math inline">a</span>: 6 3 1 <strong>10</strong> 11 18 và <span class="math inline">k</span> = 2 thì kết quả là 10</p></li>
+<li><p>(*) Cho 2 dãy <span class="math inline">A</span>, <span class="math inline">B</span> các số nguyên (kích thước dãy <span class="math inline">A</span> nhỏ hơn dãy <span class="math inline">B</span>). Hãy kiểm tra xem <span class="math inline">A</span> có phải là con của <span class="math inline">B</span> hay không?</p></li>
+<li><p>Viết hàm liệt kê các bộ 4 số <span class="math inline">a,b,c,d</span> trong mảng các số nguyên (có ít nhất 4 phần tử và đôi một khác nhau) sao cho <span class="math inline">a+b=c+d</span>.</p></li>
+<li><p>(*) Viết chương trình tính trung bình cộng của các tổng các dãy tăng dần có trong mảng các số nguyên. Ví dụ: <strong>1 2 3 4</strong> 2 3 <strong>4 5 6</strong> 4 5 6 thì trung bình = 15.</p></li>
+<li><p>Viết chương trình tính tổng tất cả các phần tử xung quanh trên mảng các số nguyên (phần tử xung quanh là hai phần tử bên cạnh cộng lai bằng chính nó, ví dụ: 1 3 2 thì 1, 2 là hai phần tử xung quanh của 3). Ví dụ: 1 3 2 5 3 9 6 tổng 17</p></li>
+<li><p>(**) Viết chương trình nhập vào hai số lớn <span class="math inline">a,b</span> nguyên (<span class="math inline">a,b</span> có từ 20 chữ số trở lên). Tính tổng, hiệu, tích, thương của hai số trên.</p></li>
+<li><p>Viết hàm tính tổng các phần tử là số Amstrong (số Amstrong là số có đặc điểm như sau: số có <span class="math inline">k</span> chữ số, tổng của các luỹ thừa bậc <span class="math inline">k</span> của các ký số bằng chính số đó. Ví dụ: 153 là số có các ký số <span class="math inline">1^{3}+5^{3}+3^{3}=153</span> là một số Amstrong).</p></li>
+<li><p>Viết hàm tìm và xóa tất cả các phần tử trùng với <span class="math inline">x</span> trong mảng một chiều các số nguyên, nếu không tồn tại phần tử x trong mảng thì trả về -1.</p></li>
+<li><p>Viết hàm xoá tất cả những phần tử trùng nhau trong dãy chỉ giữ lại một phần tử trong đó. Ví dụ: 1 6 <strong>2</strong> 3 <strong>2</strong> 4 <strong>2</strong> 6 5 thì kế tquả 1 6 2 3 4 5</p></li>
+<li><p>(**) Viết hàm xoá những phần tử sao cho mảng kết quả có thứ tự tăng dần và số lần xoá là ít nhất.</p></li>
+<li><p>Cho dãy <span class="math inline">a</span> gồm <span class="math inline">n</span> số nguyên có thứ tự tăng dần. Nhập vào một phần tử nguyên <span class="math inline">x</span>, viết hàm chèn <span class="math inline">x</span> vào dãy sao cho dãy vẫn có thứ tự tăng dần (không sắp xếp).</p></li>
+<li><p>Viết chương trình tìm số lẻ nhỏ nhất lớn hơn mọi số chẵn có trong mảng.</p></li>
+<li><p>Viết hàm tìm giá trị chẵn nhỏ nhất nhỏ hơn mọi giá trị lẻ trong mảng các số nguyên.</p></li>
+<li><p>Viết hàm tìm phần tử xuất hiện nhiều nhất trong mảng các số nguyên.</p></li>
+<li><p>Viết chương trình đếm và liệt kê các mảng con tăng dần trong mảng một chiều các số nguyên. Ví dụ: 6 5 3 2 3 4 2 7 các dãy con tăng dần là 2 3 4 và 2 7</p></li>
+<li><p>Viết chương trình tìm mảng con tăng dần có tổng lớn nhất trong mảng một chiều.</p></li>
+<li><p>(*) Viết chương trình nhập vào một dãy số <span class="math inline">a</span> gồm <span class="math inline">n</span> số nguyên (<span class="math inline">n\leq100</span>). Tìm và in ra dãy con tăng dài nhất. Ví dụ: Nhập dãy <span class="math inline">a</span>: 1 2 3 6 4 7 8 3 4 5 6 7 8 9 4 5 thì dãy con tăng dài nhất: 3 4 5 6 7 8 9</p></li>
+<li><p>(**) Viết chương trình tách 1 mảng các số nguyên thành 2 mảng <span class="math inline">a</span> và <span class="math inline">b</span>, sao cho kết quả thu được là:</p>
+<ol type="1">
+<li><p>Mảng <span class="math inline">a</span> chứa toàn số lẻ tăng dần.</p></li>
+<li><p>Mảng <span class="math inline">b</span> chứa toàn số chẵn giảm dần</p></li>
+<li><p>Không dùng thuật toán sắp xếp</p></li>
+</ol>
+<p>Hướng dẫn: Tìm vị trí chèn thích hợp khi trích phần tử từ mảng ban đầu. Ví dụ: mảng ban đầu: 9 3 8 2 7 5 1 0 10 thì Mảng a: 1 3 5 7 9 Mảng b: 10 8 2</p></li>
+<li><p>(**) Viết chương trình in ra tam giác Pascal (dùng mảng một chiều).</p></li>
+<li><p>Viết chương trình nhập vào dãy số <span class="math inline">a</span> gồm <span class="math inline">n</span> số thực (<span class="math inline">n\leq100</span>) và dãy số <span class="math inline">b</span> gồm <span class="math inline">m</span> số thực (<span class="math inline">m\leq100</span>).</p>
+<ol type="1">
+<li><p>Hãy sắp xếp hai dãy theo thứ tự tăng dần.</p></li>
+<li><p>(*) Trộn 2 dãy trên thành dãy <span class="math inline">c</span> sao cho dãy <span class="math inline">c</span> vẫn có thứ tự tăng.</p></li>
+<li><p>Xuất dãy <span class="math inline">a,b,c</span> ra màn hình.</p></li>
+</ol></li>
+<li><p>(*) Cho mảng <span class="math inline">c</span> có <span class="math inline">n</span> phần tử (<span class="math inline">n&lt;200</span>), các phần tử là các chữ số trong hệ đếm cơ số 16 (Hexa). Hãy tách mảng <span class="math inline">c</span> ra các mảng con theo điều kiện sau: các mảng con được giới hạn bởi hai lần xuất hiện thứ hai của con số trong dãy. Ví dụ: 123A4518B23 có các dãy con là 123A451, 23A4518B2, 23A4518B23</p></li>
+<li><p>(**) Cho hai số nguyên dương <span class="math inline">A,B</span>. Hãy xác định hai số <span class="math inline">C,D</span> tạo thành từ hai số <span class="math inline">A,B</span> sao cho <span class="math inline">C</span> là số lớn nhất, <span class="math inline">D</span> là số nhỏ nhất. Khi gạch đi một số chữ số trong <span class="math inline">C</span> (<span class="math inline">D</span>), thì các số còn lại giữ nguyên tạo thành <span class="math inline">A</span>, các chữ số bỏ đi giữ nguyên tạo thành <span class="math inline">B</span>. Ví dụ: <span class="math inline">A</span> = 52568, <span class="math inline">B</span> = 462384 thì <span class="math inline">C</span> = 54625682384, <span class="math inline">D</span> = 45256236884.</p></li>
+<li><p>Viết chương trình nhập vào dãy số <span class="math inline">a</span> gồm <span class="math inline">n</span> số nguyên (<span class="math inline">n\leq100</span>).</p>
+<ol type="1">
+<li><p>Hãy đảo ngược dãy đó. Ví dụ: Nhập <span class="math inline">a</span>: 3 4 5 2 0 4 1 thì dãy sau khi đảo: 1 4 0 2 5 4 3</p></li>
+<li><p>(*) Hãy kiểm tra xem dãy đã cho có thứ tự chưa (dãy được gọi là thứ tự khi là dãy tăng hoặc dãy giảm).</p></li>
+</ol></li>
+<li><p>Cho mảng <span class="math inline">a</span> có <span class="math inline">n</span> phần tử hãy cho biết mảng này có đối xứng hay không.</p></li>
+<li><p>(**) Hãy viết chương trình phát sinh ngẫu nhiên mảng các số nguyên gồm 10000 phần tử, mỗi phần tử có giá trị từ 0 đến 32000 và xây dựng hàm thống kê số lần xuất hiện các phần tử trong mảng, sau đó cho biết phần tử nào xuất hiện nhiều lần nhất. Ví dụ: mảng: 5 6 11 4 4 5 4 thì <code>5 xuat hien 2 lan</code>, <code>6 xuat hien 1 lan</code>, <code>11 xuat hien 1 lan</code>, <code>4 xuat hien 3 lan</code> và <code>4 xuat hien nhieu lan nhat</code></p></li>
+<li><p>Cho mảng <span class="math inline">a</span> có <span class="math inline">n</span> phần tử. Nhập vào số nguyên dương <span class="math inline">k</span>, dịch phải xoay vòng mảng <span class="math inline">a</span> <span class="math inline">k</span> lần. Ví dụ: mảng <span class="math inline">a</span>: 5 7 2 3 1 9 và <span class="math inline">k</span> = 2 thì dịch phải xoay vòng mảng <span class="math inline">a</span>: 1 9 5 7 2 3</p></li>
+</ol>
+</section>
+</section>
+<section id="tóm-tắt" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="tóm-tắt"><span class="header-section-number">5.3</span> TÓM TẮT</h2>
+<p>Dữ liệu kiểu mảng dùng cho việc biểu diễn những thông tin có cùng kiểu dữ liệu liên tiếp nhau. Khi cài đặt bài tập mảng một chiều nên xây dựng thành những hàm chuẩn để dùng lại cho các bài tập khác. Các thao tác trên mảng đều theo quy tắc nhất định, chúng ta có thể ứng dụng mảng trong việc biểu diễn số lớn, dùng bảng tra, khử đệ qui,.v.v</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter-4-cpp.html" class="pagination-link" aria-label="HÀM">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">HÀM</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter-6-cpp.html" class="pagination-link" aria-label="KIỂU DỮ LIỆU CHUỖI KÝ TỰ">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CHUỖI KÝ TỰ</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
