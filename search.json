@@ -498,5 +498,75 @@
     "crumbs": [
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>LẬP TRÌNH ĐƠN THỂ</span>"
     ]
+  },
+  {
+    "objectID": "ex-func.html",
+    "href": "ex-func.html",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "",
+    "text": "13.1 Bài tập 1",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-1",
+    "href": "ex-func.html#bài-tập-1",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "",
+    "text": "#include&lt;iostream&gt;\nusing namespace std;\nvoid func(int& a, int b, int &c)\n{\n    a += b;\n    b += c;\n    c += a;\n}\nvoid main()\n{\n    int a = 1, b = 2, c = 3;\n    func(b, c, a);\n    cout &lt;&lt; a &lt;&lt; endl;\n    cout &lt;&lt; b &lt;&lt; endl;\n    cout &lt;&lt; c &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-2",
+    "href": "ex-func.html#bài-tập-2",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "13.2 Bài tập 2",
+    "text": "13.2 Bài tập 2\n\n\n#include&lt;iostream&gt;\nusing namespace std;\nint a = 1, b = 2, c = 3;\nint func(int& a, int b)\n{\n    a += c + 2;\n    b -= a;\n    return a;\n}\nvoid main()\n{\n    c = func(b, b);\n    cout &lt;&lt; a &lt;&lt; endl;\n    cout &lt;&lt; b &lt;&lt; endl;\n    cout &lt;&lt; c &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-3",
+    "href": "ex-func.html#bài-tập-3",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "13.3 Bài tập 3",
+    "text": "13.3 Bài tập 3\n\n\n#include&lt;iostream&gt;\nusing namespace std;\nint func(int a, int& b)\n{\n    a += b + 4;\n    b -= a;\n    return a;\n}\nvoid main()\n{\n    int x = 5;\n    int y = func(3, x);\n    cout &lt;&lt; y &lt;&lt; endl;\n    cout &lt;&lt; x &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-4",
+    "href": "ex-func.html#bài-tập-4",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "13.4 Bài tập 4",
+    "text": "13.4 Bài tập 4\n\n\n#include&lt;iostream&gt;\nusing namespace std;\nint func2(int& a, int b)\n{\n    a += b + 3;\n    b -= a;\n    return a;\n}\nint func1(int& a, int& b)\n{\n    a += b + 4;\n    b -= a;\n    return func2(a, b);\n}\nvoid main()\n{\n    int x = 5;\n    cout &lt;&lt; func1(x, x) &lt;&lt; endl;\n    cout &lt;&lt; x &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-5",
+    "href": "ex-func.html#bài-tập-5",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "13.5 Bài tập 5",
+    "text": "13.5 Bài tập 5\n\n\n#include&lt;iostream&gt;\nusing namespace std;\nint func(int a, int& b)\n{\n    a += b + 4;\n    b -= a;\n    return a;\n}\nvoid main()\n{\n    int x = 5;\n    cout &lt;&lt; func(func(3, x), x) &lt;&lt; endl;\n    cout &lt;&lt; x &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
+  },
+  {
+    "objectID": "ex-func.html#bài-tập-6",
+    "href": "ex-func.html#bài-tập-6",
+    "title": "13  BÀI TẬP HÀM CHẠY TAY",
+    "section": "13.6 Bài tập 6",
+    "text": "13.6 Bài tập 6\n\n\n#include&lt;iostream&gt;\nusing namespace std;\nint func(int a, int& b, int *pc)\n{\n    a = b + *pc;\n    b = a + *pc;\n    *pc = b + a;\n    return b;\n}\nvoid main()\n{\n    int x = 5, y = 3, z = 4;\n    z = func(x, y, &y);\n    cout &lt;&lt; x &lt;&lt; endl;\n    cout &lt;&lt; y &lt;&lt; endl;\n    cout &lt;&lt; z &lt;&lt; endl;\n}\n\n\n\nStack table\n\n\n\n\n\n\n\nvariable\ncontext\nvalue",
+    "crumbs": [
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>BÀI TẬP HÀM CHẠY TAY</span>"
+    ]
   }
 ]

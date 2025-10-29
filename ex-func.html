@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH – CƠ SỞ LẬP TRÌNH</title>
+<title>13&nbsp; BÀI TẬP HÀM CHẠY TAY – CƠ SỞ LẬP TRÌNH</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./chapter-2-cpp.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./chapter-12-cpp.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -106,49 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="theme.css">
 </head>
@@ -162,7 +118,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./chapter-1-cpp.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex-func.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">BÀI TẬP HÀM CHẠY TAY</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -189,7 +145,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapter-1-cpp.html" class="sidebar-item-text sidebar-link active">
+  <a href="./chapter-1-cpp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></span></a>
   </div>
 </li>
@@ -261,7 +217,7 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ex-func.html" class="sidebar-item-text sidebar-link">
+  <a href="./ex-func.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">BÀI TẬP HÀM CHẠY TAY</span></span></a>
   </div>
 </li>
@@ -275,13 +231,12 @@ window.Quarto = {
     <h2 id="toc-title">PHẦN</h2>
    
   <ul>
-  <li><a href="#khái-niệm-lập-trình" id="toc-khái-niệm-lập-trình" class="nav-link active" data-scroll-target="#khái-niệm-lập-trình"><span class="header-section-number">1.1</span> KHÁI NIỆM LẬP TRÌNH</a></li>
-  <li><a href="#công-nghệ-lập-trình-truyền-thống" id="toc-công-nghệ-lập-trình-truyền-thống" class="nav-link" data-scroll-target="#công-nghệ-lập-trình-truyền-thống"><span class="header-section-number">1.2</span> CÔNG NGHỆ LẬP TRÌNH TRUYỀN THỐNG</a></li>
-  <li><a href="#công-nghệ-lập-trình-hiện-đại" id="toc-công-nghệ-lập-trình-hiện-đại" class="nav-link" data-scroll-target="#công-nghệ-lập-trình-hiện-đại"><span class="header-section-number">1.3</span> CÔNG NGHỆ LẬP TRÌNH HIỆN ĐẠI</a>
-  <ul class="collapse">
-  <li><a href="#công-cụ-và-môi-trường-lập-trình" id="toc-công-cụ-và-môi-trường-lập-trình" class="nav-link" data-scroll-target="#công-cụ-và-môi-trường-lập-trình">Công cụ và môi trường lập trình</a></li>
-  </ul></li>
-  <li><a href="#thuật-toán" id="toc-thuật-toán" class="nav-link" data-scroll-target="#thuật-toán"><span class="header-section-number">1.4</span> THUẬT TOÁN</a></li>
+  <li><a href="#bài-tập-1" id="toc-bài-tập-1" class="nav-link active" data-scroll-target="#bài-tập-1"><span class="header-section-number">13.1</span> Bài tập 1</a></li>
+  <li><a href="#bài-tập-2" id="toc-bài-tập-2" class="nav-link" data-scroll-target="#bài-tập-2"><span class="header-section-number">13.2</span> Bài tập 2</a></li>
+  <li><a href="#bài-tập-3" id="toc-bài-tập-3" class="nav-link" data-scroll-target="#bài-tập-3"><span class="header-section-number">13.3</span> Bài tập 3</a></li>
+  <li><a href="#bài-tập-4" id="toc-bài-tập-4" class="nav-link" data-scroll-target="#bài-tập-4"><span class="header-section-number">13.4</span> Bài tập 4</a></li>
+  <li><a href="#bài-tập-5" id="toc-bài-tập-5" class="nav-link" data-scroll-target="#bài-tập-5"><span class="header-section-number">13.5</span> Bài tập 5</a></li>
+  <li><a href="#bài-tập-6" id="toc-bài-tập-6" class="nav-link" data-scroll-target="#bài-tập-6"><span class="header-section-number">13.6</span> Bài tập 6</a></li>
   </ul>
 </nav>
     </div>
@@ -290,7 +245,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">BÀI TẬP HÀM CHẠY TAY</span></h1>
 </div>
 
 
@@ -307,234 +262,468 @@ window.Quarto = {
 </header>
 
 
-<blockquote class="blockquote">
-<p>An algorithm must be seen to be believed.</p>
-<p>Donald Ervin Knuth</p>
-</blockquote>
-<section id="khái-niệm-lập-trình" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="khái-niệm-lập-trình"><span class="header-section-number">1.1</span> KHÁI NIỆM LẬP TRÌNH</h2>
-<div class="tcolorbox-defn*">
-<ul>
-<li><p>CPU của máy tính được thiết kế để có thể thực hiện được các <em>chương trình mã máy</em> ) đã được hệ điều hành (HĐH) nạp vào RAM của máy tính.</p></li>
-<li><p>Chương trình mã máy thường phải tương thích với từng họ máy cụ thể, bao gồm tập hợp các chỉ thị được viết bằng các lệnh CPU của họ máy đó, được lưu trên đĩa dưới dạng một <em>tập tin mã thực thi</em> của HĐH cụ thể</p></li>
-</ul>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // $('.edit_table td').attr('contenteditable', 'true').attr('spellcheck', 'false')
+    });
+</script>
+<section id="bài-tập-1" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="bài-tập-1"><span class="header-section-number">13.1</span> Bài tập 1</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">void</span> func<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>c<span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    a <span class="op">+=</span> b<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    b <span class="op">+=</span> c<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>    c <span class="op">+=</span> a<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="op">}</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> c <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>    func<span class="op">(</span>b<span class="op">,</span> c<span class="op">,</span> a<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    cout <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>    cout <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>    cout <span class="op">&lt;&lt;</span> c <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="quy-trình-thực-hiện" class="level5">
-<h5 class="anchored" data-anchor-id="quy-trình-thực-hiện">Quy trình thực hiện</h5>
-<ul>
-<li><p>Bước 1: <em>Người sử dụng</em> ra lệnh thực hiện chạy chương trình.</p></li>
-<li><p>Bước 2: HĐH nhận được lệnh sẽ thực hiện:</p>
-<ul>
-<li><p>Tìm và nạp tập tin mã thực thi của chương trình (nằm trên đĩa) vào RAM của máy tính.</p></li>
-<li><p>Bộ đếm lệnh của CPU (CPU program counter) được trỏ đến lệnh đầu tiên của chương trình hay còn gọi là ngõ vào chương trình</p></li>
-</ul></li>
-<li><p>Bước 3: CPU thực hiện từng chỉ thị một trong RAM cho đến khi gặp lệnh kết thúc:</p>
-<ul>
-<li><p>Chép lệnh mã máy hiện hành vào thanh ghi lệnh.</p></li>
-<li><p>Tăng bộ đếm lệnh (để trỏ đến lệnh kế tiếp).</p></li>
-<li><p>Thi hành lệnh mã máy.</p></li>
-</ul></li>
-<li><p>Bước 4: Kết thúc thực hiện chương trình, HĐH chờ nhận lệnh mới.</p></li>
-</ul>
-</section>
-<section id="đặc-điểm" class="level5">
-<h5 class="anchored" data-anchor-id="đặc-điểm">Đặc điểm</h5>
-<ul>
-<li><p>Mỗi chỉ thị của chương trình là một lệnh mã máy (một dãy các byte chỉ phù hợp với qui ước tập lệnh của một loại CPU nào đó)</p></li>
-<li><p>Được cấu trúc hóa theo qui ước của HĐH.</p></li>
-<li><p>Được chạy trên một họ CPU và HĐH cụ thể.</p></li>
-<li><p>Nội dung rất khó hiểu đối với người dùng máy tính, chỉ có CPU thích hợp với hiểu rõ và thi hành được.</p></li>
-</ul>
-</section>
-<section id="nhận-xét" class="level5">
-<h5 class="anchored" data-anchor-id="nhận-xét">Nhận xét</h5>
-<ul>
-<li><p>Khó có thể sản xuất ra phần mềm bằng cách viết trực tiếp các chương trình mã máy.</p></li>
-<li><p>Nếu có làm được theo cách này thì</p>
-<ul>
-<li><p>Giá cả sẽ rất đắt do quá khó, tốn quá nhiều thời gian và công sức.</p></li>
-<li><p>Khả năng dùng lại rất giới hạn do không thể bán chongười dùng trên họ máy tính khác hay người dùng sử dụng hệ điều hành khác.</p></li>
-</ul></li>
-</ul>
-<div class="tcolorbox-defn*">
-<ul>
-<li><p><em>Ngôn ngữ lập trình</em> - NNLT là ngôn ngữ được lập trình viên sử dụng để viết chương trình cho máy tính.</p></li>
-<li><p>Khi một chương trình được viết bằng một NNLT nào đó thì các chỉ thị, câu lệnh trong chương trình phải tuân theo các qui tắc, các luật do NNLT đó qui định.</p></li>
-<li><p>Chương trình viết bằng ngôn ngữ lập trình được gọi là <em>chương trình nguồn</em> hay <em>mã nguồn</em>. Chương trình nguồn được dịch sang chương trình mã máy bằng cách chương trình dịch:</p>
-<ul>
-<li><p><em>Trình hợp dịch</em> để dịch các chương trình hợp ngữ.</p></li>
-<li><p><em>Trình thông dịch</em> và <em>trình biên dịch</em> để dịch các chương trình cấp cao.</p></li>
-</ul></li>
-</ul>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="tcolorbox-example*">
-<p>Một số ngôn ngữ lập trình thông dụng</p>
-<ul>
-<li><p>Ngôn ngữ cấp thấp: Hợp ngữ (assembly language)</p></li>
-<li><p>Ngôn ngữ cấp cao: C/C++, Java, C#, Pascal, Python, PHP, Ruby, Perl, Lisp</p></li>
-</ul>
-</div>
-<div class="tcolorbox-defn*">
-<ul>
-<li><p><em>Chương trình</em> là một dãy các <em>chỉ thị</em> điều khiển sự hoạt động của máy tính nhằm giải quyết một công việc nào đó.</p></li>
-<li><p>Người viết chương trình hay còn gọi là lập trình viên hay thảo chương viên là những người tạo lập ra những chương trình máy tính.</p></li>
-</ul>
-</div>
-<div class="tcolorbox-proexample">
-<p>Một số chương trình</p>
-<ul>
-<li>Ngôn ngữ assembly</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode asm code-with-copy"><code class="sourceCode fasm"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>.model tiny</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>.code</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">org</span> <span class="bn">100h</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    main  proc</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">mov</span>    <span class="kw">ah</span><span class="op">,</span><span class="dv">9</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">mov</span>    <span class="kw">dx</span><span class="op">,</span>offset hello_message</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">int</span>    <span class="bn">21h</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">retn</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        hello_message <span class="dt">db</span> <span class="st">'Hello, world!$'</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    main endp</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">end</span> main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Ngôn ngữ C/C++</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdio.h&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> main<span class="op">(</span><span class="dt">void</span><span class="op">)</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    pritnf<span class="op">(</span><span class="st">"Hello world!"</span><span class="op">);</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>Ngôn ngữ Java</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode java code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Hello <span class="op">{</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span> argv<span class="op">[])</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">print</span><span class="op">(</span><span class="st">"Hello everybody!"</span><span class="op">);</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="đặc-điểm-ngôn-ngữ-lập-trình-cấp-thấp" class="level5">
-<h5 class="anchored" data-anchor-id="đặc-điểm-ngôn-ngữ-lập-trình-cấp-thấp">Đặc điểm ngôn ngữ lập trình cấp thấp</h5>
-<ul>
-<li><p>Là NNLT phụ thuộc vào từng họ máy cụ thể, vì vậy không có tính tương thích.</p></li>
-<li><p>Dễ viết, đọc, sửa hơn chương trình mã máy.</p></li>
-<li><p>Ưu điểm là tận dụng và khai thác được tính năng của mỗi họ máy cụ thể, nhờ vậy chương trình có thể chạy nhanh hơn.</p></li>
-</ul>
-</section>
-<section id="đặc-điểm-ngôn-ngữ-lập-trình-cấp-cao" class="level5">
-<h5 class="anchored" data-anchor-id="đặc-điểm-ngôn-ngữ-lập-trình-cấp-cao">Đặc điểm ngôn ngữ lập trình cấp cao</h5>
-<ul>
-<li><p>Được đề xuất để khắc phục các hạn chế của NNLT cấp thấp.</p></li>
-<li><p>Dễ dùng và dễ diễn đạt được các ý tưởng trừu tượng.</p></li>
-<li><p>Có tính tương thích cao (khi thay đổi dạng máy tính thì chỉ cần sửa chương trình rất ít hoặc thậm chí không cần sửa mà vẫn đảm bảo chạy đúng).</p></li>
-</ul>
-</section>
-</section>
-<section id="công-nghệ-lập-trình-truyền-thống" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="công-nghệ-lập-trình-truyền-thống"><span class="header-section-number">1.2</span> CÔNG NGHỆ LẬP TRÌNH TRUYỀN THỐNG</h2>
-<p>Đối với các NNLT cấp cao truyền thống (trước thế hệ của C++, Java và C#), quá trình viết, dịch và chạy chương trình gồm các công đoạn như sau:</p>
-<ul>
-<li><p>B1. <em>Soạn</em> chương trình nguồn và lưu lên đĩa.</p></li>
-<li><p>B2. <em>Dịch</em> chương trình nguồn nhờ trình biên dịch.</p></li>
-<li><p>B3. <em>Nối kết</em> các tập tin mã trung gian tạo ra ở B2.</p></li>
-<li><p>B4. <em>Chạy</em> chương trình ngôn ngữ máy tạo ra ở B3.</p></li>
-</ul>
-</section>
-<section id="công-nghệ-lập-trình-hiện-đại" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="công-nghệ-lập-trình-hiện-đại"><span class="header-section-number">1.3</span> CÔNG NGHỆ LẬP TRÌNH HIỆN ĐẠI</h2>
-<ul>
-<li><p>Hạn chế của các chương trình cấp cao truyền thống là trình biên dịch của chúng phát sinh trực tiếp mã thực thi phụ thuộc vào mã máy tính của một họ máy tính và hệ điều hành cụ thể nên không thể mang đi sử dụng ở các hệ điều hành khác.</p></li>
-<li><p>NNLT hiện đại như Java hay C# trình biên dịch không dịch trực tiếp mã nguồn thành mã thực thi mà được thiết kế để có thể dịch thành <em>mã thực thi trừu tượng</em> độc lập máy và hệ điều hành.</p></li>
-<li><p>Do máy tính thật không thể hiểu được mã trừu tượng nên những chương trình dạng mã thực thi trừu tượng chỉ chạy được khi có sẵn máy ảo hỗ trợ cho việc thi hành loại mã thực thi đó.</p></li>
-<li><p>Trong các năm gần đây, các ứng dụng chạy trên web phát triển rất mạnh.</p>
-<ul>
-<li><p>Chạy trên internet thông qua một trình duyệt web.</p></li>
-<li><p>Được viết bằng các ngôn ngữ như Python, PHP, ASP.NET, JSP, Java Script, VB Script… có tính tương thích cao, hoạt động trên bất kỳ máy tính nào có internet</p></li>
-</ul></li>
-</ul>
-<section id="công-cụ-và-môi-trường-lập-trình" class="level3">
-<h3 class="anchored" data-anchor-id="công-cụ-và-môi-trường-lập-trình">Công cụ và môi trường lập trình</h3>
-<p>Toàn bộ qui trình biên dịch được thực một cách dễ dàng và thuận tiện nhờ vào công cụ gọi là <em>môi trường phát triển phần mềm</em> - IDE</p>
-<ul>
-<li><p>Soạn thảo chương trình.</p></li>
-<li><p>Quản lý hệ thống tập tin mã nguồn.</p></li>
-<li><p>Quản lý hệ thống các phiên bản của mã nguồn.</p></li>
-<li><p>Kiểm tra lỗi cú pháp (syntax error), biên dịch (compile), liên kết chương trình (link).</p></li>
-<li><p>Chạy từng dòng lệnh (debug) để tìm lỗi.</p></li>
-</ul>
-<div class="tcolorbox-example*">
-<p>Một số IDE thông dụng</p>
-<ul>
-<li><p>Eclipse: hỗ trợ nhiều ngôn ngữ lập trình.</p></li>
-<li><p>Visual Studio, Visual Studio Code: hỗ trợ nghiều ngôn ngữ lập trình</p></li>
-</ul>
+<section id="bài-tập-2" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="bài-tập-2"><span class="header-section-number">13.2</span> Bài tập 2</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">2</span><span class="op">,</span> c <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="dt">int</span> func<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    a <span class="op">+=</span> c <span class="op">+</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    b <span class="op">-=</span> a<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    c <span class="op">=</span> func<span class="op">(</span>b<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    cout <span class="op">&lt;&lt;</span> a <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>    cout <span class="op">&lt;&lt;</span> b <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    cout <span class="op">&lt;&lt;</span> c <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </section>
-</section>
-<section id="thuật-toán" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="thuật-toán"><span class="header-section-number">1.4</span> THUẬT TOÁN</h2>
-<section id="các-bước-thiết-kế-chương-trình" class="level5">
-<h5 class="anchored" data-anchor-id="các-bước-thiết-kế-chương-trình">Các bước thiết kế chương trình</h5>
-<ul>
-<li><p>Xác định bài toán</p></li>
-<li><p>Phân tích bài toán</p></li>
-<li><p>Thiết kế thuật toán</p></li>
-<li><p>Cài đặt chương trình</p></li>
-<li><p>Kiểm thử chương trình</p></li>
-</ul>
-<div class="tcolorbox-defn*">
-<p><em>Thuật toán</em> là tập hợp hữu hạn các <em>chỉ thị</em> được định nghĩa rõ ràng nhằm giải quyết một vấn đề cụ thể nào đó.</p>
+<section id="bài-tập-3" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="bài-tập-3"><span class="header-section-number">13.3</span> Bài tập 3</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="dt">int</span> func<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span><span class="op">&amp;</span> b<span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="op">{</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    a <span class="op">+=</span> b <span class="op">+</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    b <span class="op">-=</span> a<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>    <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="op">}</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="op">{</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="dt">int</span> y <span class="op">=</span> func<span class="op">(</span><span class="dv">3</span><span class="op">,</span> x<span class="op">);</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>    cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>    cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Một thuật toán phải có các tính chất sau</p>
-<ul>
-<li><p>Tính chính xác: quá trình tính toán hay các thao tác máy tính thực hiện là chính xác.</p></li>
-<li><p>Tính rõ ràng: các câu lệnh minh bạch được sắp xếp theo thứ tự nhất định.</p></li>
-<li><p>Tính khách quan: được viết bởi nhiều người trên máy tính nhưng kết quả phải như nhau.</p></li>
-<li><p>Tính phổ dụng: có thể áp dụng cho một lớp các bài toán có đầu vào tương tự nhau.</p></li>
-<li><p>Tính kết thúc: hữu hạn các bước tính toán</p></li>
-</ul>
-</section>
-<section id="trình-bày-thuật-toán-như-thế-nào" class="level5">
-<h5 class="anchored" data-anchor-id="trình-bày-thuật-toán-như-thế-nào">Trình bày thuật toán như thế nào?</h5>
-<ul>
-<li><p>Trình bày bằng ngôn ngữ tự nhiên</p></li>
-<li><p>Trình bày bằng mã giả</p></li>
-<li><p>Trình bày bằng lưu đồ</p></li>
-</ul>
-<div class="tcolorbox-proexample">
-<p>Hãy trình bày cách làm món sữa dâu bằng ngôn ngữ tự nhiên</p>
-<p>Cách 1</p>
-<ul>
-<li><p>Lấy một ít sữa.</p></li>
-<li><p>Đổ nước ép dâu vào.</p></li>
-<li><p>Trộn hỗn hợp này và làm lạnh.</p></li>
-</ul>
-<p>Cách 2</p>
-<ul>
-<li><p>Rót một ly sữa vào máy xay</p></li>
-<li><p>Đổ thêm vào một ít nước dâu ép</p></li>
-<li><p>Đóng nắm máy xay</p></li>
-<li><p>Mở điện và bắt đầu trộn</p></li>
-<li><p>Dừng máy trộn lại</p></li>
-<li><p>Nếu đã trộn đều thì tắt máy, ngược lại thì trộn tiếp</p></li>
-<li><p>Khi đã trộn xong, rót hỗn hợp vào tô và đặt vào tủ lạnh</p></li>
-<li><p>Để lạnh một lúc rồi lấy ra dùng</p></li>
-</ul>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="tcolorbox-proexample">
-<p>Hãy trình bày cách sắp xếp một dãy số <span class="math inline">L</span> theo thứ tự tăng dần bằng ngôn ngữ mã giả</p>
-<p>MERGESORT(<span class="math inline">L</span>)</p>
-<p>if SIZE(<span class="math inline">L</span>)&gt; 1</p>
-<p>  SPLIT(<span class="math inline">L</span>, <span class="math inline">L_{1}</span>, <span class="math inline">L_{2}</span>) (tách dãy <span class="math inline">L</span> thành <span class="math inline">L_{1}</span> và <span class="math inline">L_{2}</span>)</p>
-<p>  MERGESORT(<span class="math inline">L_{1}</span>) (sắp xếp dãy <span class="math inline">L_{1}</span>)</p>
-<p>  MERGESORT(<span class="math inline">L_{2}</span>) (sắp xếp dãy <span class="math inline">L_{2}</span>)</p>
-<p>  MERGE(<span class="math inline">L_{1}</span>, <span class="math inline">L_{2}</span>, <span class="math inline">L)</span> (trộn dãy <span class="math inline">L_{1}</span> và <span class="math inline">L_{2}</span> thành <span class="math inline">L</span>)</p>
+</div>
+</section>
+<section id="bài-tập-4" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="bài-tập-4"><span class="header-section-number">13.4</span> Bài tập 4</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="dt">int</span> func2<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="op">{</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    a <span class="op">+=</span> b <span class="op">+</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    b <span class="op">-=</span> a<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="op">}</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="dt">int</span> func1<span class="op">(</span><span class="dt">int</span><span class="op">&amp;</span> a<span class="op">,</span> <span class="dt">int</span><span class="op">&amp;</span> b<span class="op">)</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="op">{</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    a <span class="op">+=</span> b <span class="op">+</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    b <span class="op">-=</span> a<span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="cf">return</span> func2<span class="op">(</span>a<span class="op">,</span> b<span class="op">);</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="op">}</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="op">{</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>    cout <span class="op">&lt;&lt;</span> func1<span class="op">(</span>x<span class="op">,</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a>    cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="bài-tập-5" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="bài-tập-5"><span class="header-section-number">13.5</span> Bài tập 5</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="dt">int</span> func<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span><span class="op">&amp;</span> b<span class="op">)</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>    a <span class="op">+=</span> b <span class="op">+</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>    b <span class="op">-=</span> a<span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>    <span class="cf">return</span> a<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="op">}</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="op">{</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    cout <span class="op">&lt;&lt;</span> func<span class="op">(</span>func<span class="op">(</span><span class="dv">3</span><span class="op">,</span> x<span class="op">),</span> x<span class="op">)</span> <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="bài-tập-6" class="level2" data-number="13.6">
+<h2 data-number="13.6" class="anchored" data-anchor-id="bài-tập-6"><span class="header-section-number">13.6</span> Bài tập 6</h2>
+<div class="edit_table grid">
+<div class="g-col-8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource cpp number-lines code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1"></a><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dt">int</span> func<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span><span class="op">&amp;</span> b<span class="op">,</span> <span class="dt">int</span> <span class="op">*</span>pc<span class="op">)</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="op">{</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>    a <span class="op">=</span> b <span class="op">+</span> <span class="op">*</span>pc<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>    b <span class="op">=</span> a <span class="op">+</span> <span class="op">*</span>pc<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="op">*</span>pc <span class="op">=</span> b <span class="op">+</span> a<span class="op">;</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="cf">return</span> b<span class="op">;</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="op">}</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="dt">void</span> main<span class="op">()</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="op">{</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="dt">int</span> x <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> y <span class="op">=</span> <span class="dv">3</span><span class="op">,</span> z <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    z <span class="op">=</span> func<span class="op">(</span>x<span class="op">,</span> y<span class="op">,</span> <span class="op">&amp;</span>y<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>    cout <span class="op">&lt;&lt;</span> x <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>    cout <span class="op">&lt;&lt;</span> y <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>    cout <span class="op">&lt;&lt;</span> z <span class="op">&lt;&lt;</span> endl<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="g-col-4">
+<table class="table-bordered table-striped table-hover caption-top table">
+<caption>Stack table</caption>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>variable</th>
+<th>context</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -940,14 +1129,11 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Giới thiệu">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Giới thiệu</span>
+      <a href="./chapter-12-cpp.html" class="pagination-link" aria-label="LẬP TRÌNH ĐƠN THỂ">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapter-2-cpp.html" class="pagination-link" aria-label="LƯU ĐỒ THUẬT TOÁN">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
