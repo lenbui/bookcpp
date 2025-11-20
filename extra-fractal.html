@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="vi" xml:lang="vi"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; FRACTAL – CƠ SỞ LẬP TRÌNH</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ex-func.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-317aa39e225c698ea508ddd136b93e4d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="theme.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CƠ SỞ LẬP TRÌNH</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools tools-end">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./extra-fractal.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">FRACTAL</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Giới thiệu</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-1-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">CÁC KHÁI NIỆM CƠ BẢN VỀ LẬP TRÌNH</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-2-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LƯU ĐỒ THUẬT TOÁN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-3-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CƠ BẢN VÀ CẤU TRÚC ĐIỀU KHIỂN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-4-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">HÀM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-5-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG MỘT CHIỀU</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-6-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CHUỖI KÝ TỰ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-7-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU MẢNG HAI CHIỀU</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-8-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CẤU TRÚC</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-9-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU TẬP TIN</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-10-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">KIỂU DỮ LIỆU CON TRỎ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-11-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">KỸ THUẬT ĐỆ QUI</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter-12-cpp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">LẬP TRÌNH ĐƠN THỂ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-func.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">BÀI TẬP HÀM CHẠY TAY</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./extra-fractal.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">FRACTAL</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">PHẦN</h2>
+   
+  <ul>
+  <li><a href="#tổng-quan-về-fractal" id="toc-tổng-quan-về-fractal" class="nav-link active" data-scroll-target="#tổng-quan-về-fractal"><span class="header-section-number">14.1</span> Tổng quan về Fractal</a>
+  <ul class="collapse">
+  <li><a href="#ứng-dụng-của-fractal" id="toc-ứng-dụng-của-fractal" class="nav-link" data-scroll-target="#ứng-dụng-của-fractal">Ứng dụng của Fractal</a></li>
+  <li><a href="#các-ví-dụ-fractal-cổ-điển" id="toc-các-ví-dụ-fractal-cổ-điển" class="nav-link" data-scroll-target="#các-ví-dụ-fractal-cổ-điển">Các ví dụ Fractal cổ điển</a></li>
+  <li><a href="#số-chiều-tự-đồng-dạng-fractal-dimension" id="toc-số-chiều-tự-đồng-dạng-fractal-dimension" class="nav-link" data-scroll-target="#số-chiều-tự-đồng-dạng-fractal-dimension">Số chiều tự đồng dạng (Fractal Dimension)</a></li>
+  </ul></li>
+  <li><a href="#hệ-hàm-lặp-ifs" id="toc-hệ-hàm-lặp-ifs" class="nav-link" data-scroll-target="#hệ-hàm-lặp-ifs"><span class="header-section-number">14.2</span> Hệ hàm lặp (IFS)</a>
+  <ul class="collapse">
+  <li><a href="#cơ-sở-toán-học" id="toc-cơ-sở-toán-học" class="nav-link" data-scroll-target="#cơ-sở-toán-học">Cơ sở toán học</a></li>
+  <li><a href="#thuật-toán-tạo-hình-fractal-từ-ifs" id="toc-thuật-toán-tạo-hình-fractal-từ-ifs" class="nav-link" data-scroll-target="#thuật-toán-tạo-hình-fractal-từ-ifs">Thuật toán tạo hình Fractal từ IFS</a></li>
+  </ul></li>
+  <li><a href="#hệ-thống-l-system" id="toc-hệ-thống-l-system" class="nav-link" data-scroll-target="#hệ-thống-l-system"><span class="header-section-number">14.3</span> Hệ thống (L-System)</a>
+  <ul class="collapse">
+  <li><a href="#đồ-họa-turtle-turtle-graphics" id="toc-đồ-họa-turtle-turtle-graphics" class="nav-link" data-scroll-target="#đồ-họa-turtle-turtle-graphics">Đồ họa Turtle (Turtle Graphics)</a></li>
+  <li><a href="#định-nghĩa-l-system" id="toc-định-nghĩa-l-system" class="nav-link" data-scroll-target="#định-nghĩa-l-system">Định nghĩa L-System</a></li>
+  <li><a href="#ví-dụ-l-system" id="toc-ví-dụ-l-system" class="nav-link" data-scroll-target="#ví-dụ-l-system">Ví dụ L-System</a></li>
+  </ul></li>
+  <li><a href="#tập-mandelbrot" id="toc-tập-mandelbrot" class="nav-link" data-scroll-target="#tập-mandelbrot"><span class="header-section-number">14.4</span> Tập Mandelbrot</a>
+  <ul class="collapse">
+  <li><a href="#định-nghĩa" id="toc-định-nghĩa" class="nav-link" data-scroll-target="#định-nghĩa">Định nghĩa</a></li>
+  <li><a href="#tính-chất-hội-tụ" id="toc-tính-chất-hội-tụ" class="nav-link" data-scroll-target="#tính-chất-hội-tụ">Tính chất hội tụ</a></li>
+  <li><a href="#thuật-toán-vẽ-tập-mandelbrot" id="toc-thuật-toán-vẽ-tập-mandelbrot" class="nav-link" data-scroll-target="#thuật-toán-vẽ-tập-mandelbrot">Thuật toán vẽ tập Mandelbrot</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">FRACTAL</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="tổng-quan-về-fractal" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="tổng-quan-về-fractal"><span class="header-section-number">14.1</span> Tổng quan về Fractal</h2>
+<p>Fractal là một môn hình học nghiên cứu các đối tượng có đặc tính <strong>tự đồng dạng</strong> (self-similarity). Đây là thuộc tính mà khi ta phóng to một phần nhỏ của đối tượng, phần đó lại mang hình ảnh giống hệt như toàn bộ đối tượng. Đặc điểm này xuất hiện rất nhiều trong thế giới tự nhiên, ví dụ như hình dạng của cây cối, đường bờ biển, các dãy núi, hay các gân lá.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-intro.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<section id="ứng-dụng-của-fractal" class="level3">
+<h3 class="anchored" data-anchor-id="ứng-dụng-của-fractal">Ứng dụng của Fractal</h3>
+<p>Đồ họa fractal có nhiều ứng dụng thực tiễn:</p>
+<ul>
+<li><em>Tạo ảnh</em>: Dùng để tạo ra các hình ảnh tự nhiên phức tạp như mây, núi, mặt nước, cây cối.</li>
+<li><em>Nén ảnh</em>: Các thuật toán nén ảnh dựa trên fractal khai thác sự lặp lại cấu trúc trong ảnh để giảm dung lượng lưu trữ.</li>
+<li><em>Nghiên cứu khoa học</em>: Mô hình hóa các hiện tượng hỗn loạn, cấu trúc vật chất, và các hệ thống động lực phức tạp.</li>
+</ul>
+</section>
+<section id="các-ví-dụ-fractal-cổ-điển" class="level3">
+<h3 class="anchored" data-anchor-id="các-ví-dụ-fractal-cổ-điển">Các ví dụ Fractal cổ điển</h3>
+<p>Nhiều fractal được xây dựng bằng cách lặp đi lặp lại một quy tắc sinh đơn giản:</p>
+<ul>
+<li><p>Đường cong Von Koch (Koch Curve):</p>
+<ul>
+<li><em>Tập gốc</em> (<span class="math inline">n=0</span>): Một đoạn thẳng.</li>
+<li><em>Quy tắc sinh</em>: Chia đoạn thẳng làm 3 phần bằng nhau. Bỏ đoạn ở giữa và thay bằng hai đoạn thẳng tạo thành một tam giác đều.</li>
+<li><em>Lặp lại</em>: Áp dụng quy tắc này cho tất cả các đoạn thẳng mới.</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQSyfW5UalAcRaXbsyaDlIzaASSTtOX0mKoDQ82Z6397_Oc" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-vonkoch.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div></li>
+<li><p>Đường cong Minkowski:</p>
+<ul>
+<li><em>Tập gốc</em> (<span class="math inline">n=0</span>): Một đoạn thẳng.</li>
+<li><em>Quy tắc sinh</em>: Chia đoạn thẳng làm 4 phần. Bỏ 2 đoạn giữa và thay thế bằng 6 đoạn thẳng mới.</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQSj9RdpaBLFRrGSogIP-P6RAcu4EG3gW65B_Ku0kvRdg-8" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-min.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div></li>
+<li><p>Bông tuyết Von Koch (Koch Snowflake):</p>
+<ul>
+<li><em>Tập gốc</em> (<span class="math inline">n=0</span>): Một hình tam giác đều.</li>
+<li><em>Quy tắc sinh</em>: Áp dụng quy tắc sinh của đường cong Von Koch lên cả ba cạnh của tam giác.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-snowflake-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-snowflake-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div></li>
+<li><p>Hòn đảo Minkowski:</p>
+<ul>
+<li><em>Tập gốc</em> (<span class="math inline">n=0</span>): Một hình vuông.</li>
+<li><em>Quy tắc sinh</em>: Áp dụng quy tắc sinh của đường cong Minkowski lên cả bốn cạnh của hình vuông.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-island.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div></li>
+<li><p>Tam giác Sierpinski:</p>
+<ul>
+<li><em>Tập gốc</em> (<span class="math inline">n=0</span>): Một tam giác đều đặc.</li>
+<li><em>Quy tắc sinh</em>: Chia tam giác thành 4 tam giác đều nhỏ hơn bằng cách nối trung điểm 3 cạnh. Bỏ đi tam giác ở giữa.</li>
+<li><em>Lặp lại</em>: Áp dụng quy tắc này cho 3 tam giác đều còn lại.</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQT2n9EvS8FdTaELR0gKXbmbAYwpr7IYqyum-aXspEJJ9rQ" width="100%" height="600" frameborder="0" scrolling="no">
+</iframe>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-sierpinski.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-sierpinski.gif" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:30.0%"></p>
+</figure>
+</div></li>
+</ul>
+</section>
+<section id="số-chiều-tự-đồng-dạng-fractal-dimension" class="level3">
+<h3 class="anchored" data-anchor-id="số-chiều-tự-đồng-dạng-fractal-dimension">Số chiều tự đồng dạng (Fractal Dimension)</h3>
+<p>Một đặc điểm quan trọng của fractal là “số chiều” của chúng không phải lúc nào cũng là số nguyên (như 1D, 2D, 3D). Số chiều tự đồng dạng (<span class="math inline">D</span>) được định nghĩa dựa trên mối quan hệ giữa <em>số lượng bản sao tự đồng dạng</em> (<span class="math inline">N</span>) và <em>tỉ lệ co</em> (<span class="math inline">s</span>).</p>
+<div class="definition">
+<p>Nếu một hình <span class="math inline">H</span> được chia thành <span class="math inline">N</span> phần, mỗi phần là bản sao của <span class="math inline">H</span> được thu nhỏ với tỉ lệ <span class="math inline">s</span>, thì số chiều <span class="math inline">D</span> được tính bằng:</p>
+<p><span class="math display">D = \frac{\log(N)}{\log(1/s)}</span></p>
+</div>
+<ul>
+<li><p>Đoạn thẳng (1D): Chia thành <span class="math inline">N</span> đoạn nhỏ, tỉ lệ co <span class="math inline">s = 1/N</span>. <span class="math display">D = \frac{\log(N)}{\log(1 / (1/N))} = \frac{\log(N)}{\log(N)} = 1</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-d-1D.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div></li>
+<li><p>Hình vuông (2D): Chia thành <span class="math inline">N \times N = N^2</span> hình vuông nhỏ, tỉ lệ co <span class="math inline">s = 1/N</span>. <span class="math display">D = \frac{\log(N^2)}{\log(1 / (1/N))} = \frac{2 \log(N)}{\log(N)} = 2</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-d-2D.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div></li>
+<li><p>Hình lập phương (3D): Chia thành <span class="math inline">N \times N = N^3</span> lập phương nhỏ, tỉ lệ co <span class="math inline">s = 1/N</span>. <span class="math display">D = \frac{\log(N^3)}{\log(1 / (1/N))} = \frac{3 \log(N)}{\log(N)} = 3</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-d-3D.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div></li>
+<li><p>Đường cong Von Koch: Mỗi đoạn được thay thế bằng 4 đoạn nhỏ hơn (<span class="math inline">N=4</span>), mỗi đoạn mới có độ dài bằng <span class="math inline">1/3</span> đoạn cũ (<span class="math inline">s=1/3</span>). <span class="math display">D = \frac{\log(4)}{\log(1 / (1/3))} = \frac{\log(4)}{\log(3)} \approx 1.26</span> Giá trị 1.26 (lớn hơn 1D của đường thẳng nhưng nhỏ hơn 2D của hình vuông) chính là “số chiều fractal” của nó.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-d-vankock.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="500"></p>
+</figure>
+</div></li>
+</ul>
+</section>
+</section>
+<section id="hệ-hàm-lặp-ifs" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="hệ-hàm-lặp-ifs"><span class="header-section-number">14.2</span> Hệ hàm lặp (IFS)</h2>
+<p>IFS (Iterated Function Systems) là một cơ sở toán học vững chắc để định nghĩa và tạo ra các hình fractal.</p>
+<section id="cơ-sở-toán-học" class="level3">
+<h3 class="anchored" data-anchor-id="cơ-sở-toán-học">Cơ sở toán học</h3>
+<div class="definition">
+<p>Không gian Hausdorff <span class="math inline">(H(X))</span>:</p>
+<ul>
+<li>Đây là một không gian đặc biệt mà mỗi “phần tử” của nó là một <em>tập hợp</em> con (cụ thể là tập compact, khác rỗng) từ <span class="math inline">X</span>.</li>
+<li>Người ta định nghĩa khoảng cách Hausdorff <span class="math inline">h(A, B)</span> giữa hai tập hợp <span class="math inline">A</span> và <span class="math inline">B</span>.</li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-set-haus.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="definition">
+<p>Ánh xạ co (Contraction Mapping):</p>
+<ul>
+<li><p>Trong một không gian Metric đầy đủ <span class="math inline">(X, d)</span> (nơi ta có thể đo khoảng cách <span class="math inline">d</span>).</p></li>
+<li><p>Một ánh xạ <span class="math inline">T</span> được gọi là ánh xạ co nếu nó luôn kéo các điểm lại gần nhau hơn.</p></li>
+<li><p>Tức là, tồn tại <span class="math inline">k</span> (với <span class="math inline">0 &lt; k &lt; 1</span>) sao cho: <span class="math display">d(T(x'), T(x'')) \le k \cdot d(x', x'')</span> với mọi điểm <span class="math inline">x', x''</span> trong <span class="math inline">X</span>.</p></li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-con-map.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<ul>
+<li><strong>Tính chất quan trọng:</strong> Mọi ánh xạ co đều có một <strong>điểm bất động duy nhất</strong>. Nếu ta bắt đầu từ một điểm <span class="math inline">c</span> bất kỳ và lặp <span class="math inline">x_{n+1} = T(x_n)</span>, dãy <span class="math inline">x_n</span> sẽ luôn hội tụ về điểm bất động đó.</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQTjVCvhu_ySSr-pW4D02zGsAbklApcDIE_4_-JQnpCKKi8" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<div class="definition">
+<ul>
+<li>Một hệ hàm lặp (IFS) là một tập hợp các ánh xạ co <span class="math inline">\{T_1, T_2, \dots, T_N\}</span> trên <span class="math inline">X</span>.</li>
+<li>Ta định nghĩa một ánh xạ co <span class="math inline">T</span> mới trên không gian Hausdorff <span class="math inline">H(X)</span> như sau: <span class="math display">T(A) = T_1(A) \cup T_2(A) \cup \dots \cup T_N(A)</span> (trong đó <span class="math inline">T_i(A) = \{T_i(x) \mid x \in A\}</span>).</li>
+<li>Vì <span class="math inline">T</span> cũng là một ánh xạ co (trong không gian Hausdorff), nó cũng có một “điểm bất động” duy nhất. “Điểm bất động” này là một <em>tập hợp</em>, và đó chính là <strong>hấp tử (attractor)</strong>, hay hình fractal, của hệ IFS.</li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-ifs.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="thuật-toán-tạo-hình-fractal-từ-ifs" class="level3">
+<h3 class="anchored" data-anchor-id="thuật-toán-tạo-hình-fractal-từ-ifs">Thuật toán tạo hình Fractal từ IFS</h3>
+<p>Có hai thuật toán chính để vẽ hấp tử của IFS:</p>
+<div class="algorithm">
+<p><strong>Thuật toán lặp xác định (Deterministic Algorithm):</strong></p>
+<ul>
+<li>Bắt đầu với một hình gốc <span class="math inline">S</span> bất kỳ (ví dụ, một hình tam giác).</li>
+<li>Lặp lại <span class="math inline">n</span> lần: <span class="math display">S = T(S) = T_1(S) \cup T_2(S) \cup \dots \cup T_N(S)</span></li>
+<li>Hình ảnh sẽ hội tụ về fractal.</li>
+</ul>
+</div>
+<p>Ví dụ tam giác đều (Tam giác Sierpinski): Dùng 3 phép biến đổi affine (tỉ lệ + tịnh tiến)</p>
+<ul>
+<li><span class="math inline">T_1</span>: Tỉ lệ (0.5, 0.5)</li>
+<li><span class="math inline">T_2</span>: Tỉ lệ (0.5, 0.5) + Tịnh tiến (0.5, 0)</li>
+<li><span class="math inline">T_3</span>: Tỉ lệ (0.5, 0.5) + Tịnh tiến (0.25, 0.433)</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQQahbjEPhbZRY8tgm19XOwqAa006BFZwz1ool63z6r7OlQ" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<p>Ví dụ tam giác vuông: Dùng 3 phép biến đổi affine (tỉ lệ + tịnh tiến)</p>
+<ul>
+<li><span class="math inline">T_1</span>: Tỉ lệ (0.5, 0.5)</li>
+<li><span class="math inline">T_2</span>: Tỉ lệ (0.5, 0.5) + Tịnh tiến (0.5, 0)</li>
+<li><span class="math inline">T_3</span>: Tỉ lệ (0.5, 0.5) + Tịnh tiến (0.0, 0.5)</li>
+</ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQRzRVlE8tckTYA-ma3UIB5BAfi3AyE2Bf6KZh3gSpjBEik" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<div class="algorithm">
+<p><strong>Thuật toán lặp ngẫu nhiên (Random Algorithm):</strong></p>
+<ul>
+<li><p><strong>Input:</strong> Các phép biến đổi <span class="math inline">\{T_1, \dots, T_N\}</span>, một điểm bắt đầu <span class="math inline">P_0 = (x_0, y_0)</span>, và số lần lặp <span class="math inline">k</span>.</p>
+<ol type="1">
+<li><p>Vẽ điểm <span class="math inline">P_0</span>.</p></li>
+<li><p>Lặp <span class="math inline">i</span> từ 0 đến <span class="math inline">k</span>:</p>
+<ol type="a">
+<li>Chọn ngẫu nhiên một phép biến đổi <span class="math inline">T</span> từ tập IFS.</li>
+<li>Tính điểm tiếp theo: <span class="math inline">P_{i+1} = T(P_i)</span>.</li>
+<li>Vẽ điểm <span class="math inline">P_{i+1}</span>.</li>
+</ol></li>
+</ol></li>
+<li><p>Sau một số lần lặp (ví dụ <span class="math inline">k=10000</span>), tập hợp các điểm được vẽ sẽ hiện lên hình dạng của fractal.</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="hệ-thống-l-system" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="hệ-thống-l-system"><span class="header-section-number">14.3</span> Hệ thống (L-System)</h2>
+<p>L-System (Lindenmayer System) là một hệ thống văn phạm hình thức, ban đầu được phát triển để mô hình hóa sự phát triển của thực vật. Nó tạo ra fractal bằng cách <strong>viết lại chuỗi (string rewriting)</strong>.</p>
+<section id="đồ-họa-turtle-turtle-graphics" class="level3">
+<h3 class="anchored" data-anchor-id="đồ-họa-turtle-turtle-graphics">Đồ họa Turtle (Turtle Graphics)</h3>
+<p>L-System thường được vẽ bằng <strong>Đồ họa Turtle</strong>. Một con “rùa” (bút vẽ) có 3 thuộc tính:</p>
+<ul>
+<li>Vị trí (<span class="math inline">p</span>)</li>
+<li>Hướng (<span class="math inline">\alpha</span>)</li>
+<li>Tham số vẽ: bước nhảy <span class="math inline">\Delta d</span> và góc quay <span class="math inline">\Delta \alpha</span>.</li>
+</ul>
+<p>Các ký hiệu trong chuỗi L-System được diễn giải thành lệnh điều khiển “rùa”:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 76%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lệnh</th>
+<th>Nội dung</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">F</span></td>
+<td>Vẽ tới trước một đoạn <span class="math inline">\Delta d</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">+</span></td>
+<td>Quay bút vẽ sang trái một góc <span class="math inline">\Delta \alpha</span>.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">-</span></td>
+<td>Quay bút vẽ sang phải một góc <span class="math inline">\Delta \alpha</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">[</span></td>
+<td>Lưu lại vị trí (<span class="math inline">p</span>) và hướng (<span class="math inline">\alpha</span>) hiện tại của rùa (đẩy vào stack).</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">]</span></td>
+<td>Phục hồi lại vị trí (<span class="math inline">p</span>) và hướng (<span class="math inline">\alpha</span>) đã lưu (pop khỏi stack).</td>
+</tr>
+</tbody>
+</table>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQQMpEnB0NYZS5rDExHhxTUiARcZIzRXR0cTAO_Zw2u-rVE?em=2&amp;wdAr=1.3333333333333333" width="100%" height="600px" frameborder="0">
+</iframe>
+</section>
+<section id="định-nghĩa-l-system" class="level3">
+<h3 class="anchored" data-anchor-id="định-nghĩa-l-system">Định nghĩa L-System</h3>
+<p>Một L-System bao gồm:</p>
+<ol type="1">
+<li><strong>Tập ký hiệu:</strong> Các ký tự mà rùa hiểu (ví dụ: <span class="math inline">F, +, -, [, ]</span>).</li>
+<li><strong>Tiền đề (Axiom)</strong> <span class="math inline">s_0</span>: Chuỗi ký tự ban đầu.</li>
+<li><strong>Tập luật sinh (Production Rules):</strong> Các quy tắc thay thế ký tự. Ví dụ: <span class="math inline">F \to F+F-F</span>.</li>
+</ol>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQS3_Woke9M1QLtlK3rUeLyXAXC7TA4nBOuUbT4b5kTYIiQ" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+<p><strong>Quá trình thực hiện:</strong></p>
+<ol type="1">
+<li>Bắt đầu từ tiên đề <span class="math inline">s_0</span>.</li>
+<li>Thực hiện lặp <span class="math inline">n</span> lần: Ở mỗi bước, áp dụng đồng thời các luật sinh cho mọi ký tự trong chuỗi hiện tại để tạo ra chuỗi mới (<span class="math inline">s_0 \to s_1 \to s_2 \to \dots \to s_n</span>).</li>
+<li>Dùng Đồ họa Turtle để vẽ chuỗi <span class="math inline">s_n</span> cuối cùng.</li>
+</ol>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQSqHaQ7eoYpQaa3LHCgC5dEAY5frvdmrioBmvAWi2ENnGo" width="100%" height="600px" frameborder="0" scrolling="no">
+</iframe>
+</section>
+<section id="ví-dụ-l-system" class="level3">
+<h3 class="anchored" data-anchor-id="ví-dụ-l-system">Ví dụ L-System</h3>
+</section>
+</section>
+<section id="tập-mandelbrot" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="tập-mandelbrot"><span class="header-section-number">14.4</span> Tập Mandelbrot</h2>
+<p>Tập Mandelbrot là một trong những fractal nổi tiếng nhất, được định nghĩa trong mặt phẳng số phức.</p>
+<section id="định-nghĩa" class="level3">
+<h3 class="anchored" data-anchor-id="định-nghĩa">Định nghĩa</h3>
+<div class="definition">
+<p>Tập Mandelbrot được định nghĩa dựa trên một biểu thức đệ quy đơn giản:</p>
+<ul>
+<li>Bắt đầu với <span class="math inline">z_0 = 0 + 0i</span>.</li>
+<li>Lặp lại: <span class="math inline">z_{n+1} = z_n^2 + c</span>.</li>
+</ul>
+<p>Trong đó <span class="math inline">c</span> là một số phức. <strong>Tập Mandelbrot là tập hợp tất cả các số phức</strong> <span class="math inline">c</span> sao cho dãy <span class="math inline">\{z_n\}</span> <em>không</em> tiến ra vô cực (tức là dãy bị chặn).</p>
+</div>
+</section>
+<section id="tính-chất-hội-tụ" class="level3">
+<h3 class="anchored" data-anchor-id="tính-chất-hội-tụ">Tính chất hội tụ</h3>
+<p>Một tính chất then chốt để vẽ tập Mandelbrot: Nếu tồn tại một <span class="math inline">k</span> nào đó mà mô-đun (độ lớn) của <span class="math inline">z_k</span> vượt quá 2 (tức là <span class="math inline">|z_k| &gt; 2</span>), thì dãy <span class="math inline">\{z_n\}</span> chắc chắn sẽ tiến ra vô cực.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-man-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="thuật-toán-vẽ-tập-mandelbrot" class="level3">
+<h3 class="anchored" data-anchor-id="thuật-toán-vẽ-tập-mandelbrot">Thuật toán vẽ tập Mandelbrot</h3>
+<p>Thuật toán này kiểm tra từng điểm <span class="math inline">c</span> trên mặt phẳng phức (tương ứng với từng pixel trên màn hình) để xem nó có thuộc tập hợp hay không.</p>
+<p>Cho mỗi pixel <span class="math inline">(x, y)</span> trên màn hình:</p>
+<ol type="1">
+<li><p><strong>Ánh xạ:</strong> Chuyển đổi tọa độ pixel <span class="math inline">(x, y)</span> thành một số phức <span class="math inline">c = x + yi</span> trong một vùng của mặt phẳng phức.</p></li>
+<li><p><strong>Kiểm tra hội tụ:</strong></p>
+<ol type="a">
+<li><p>Khởi tạo <span class="math inline">z = 0</span>.</p></li>
+<li><p>Đặt một số lần lặp tối đa (ví dụ <span class="math inline">N = 100</span>).</p></li>
+<li><p>Lặp <span class="math inline">i</span> từ 0 đến <span class="math inline">N</span>:</p>
+<ol type="i">
+<li>Tính <span class="math inline">z = z^2 + c</span>.</li>
+<li>Nếu <span class="math inline">|z| &gt; 2</span>: Dãy tiến ra vô cực. Điểm <span class="math inline">c</span> <strong>không</strong> thuộc tập Mandelbrot. Dừng lặp.</li>
+</ol></li>
+<li><p>Nếu vòng lặp kết thúc mà <span class="math inline">|z|</span> vẫn <span class="math inline">\le 2</span>: Dãy không tiến ra vô cực (trong giới hạn <span class="math inline">N</span> lần lặp). Điểm <span class="math inline">c</span> <strong>thuộc</strong> tập Mandelbrot.</p></li>
+</ol></li>
+<li><p><strong>Tô màu:</strong></p>
+<ul>
+<li>Nếu <span class="math inline">c</span> thuộc tập Mandelbrot, tô pixel <span class="math inline">(x, y)</span> màu đen.</li>
+<li>Nếu <span class="math inline">c</span> không thuộc tập Mandelbrot, không tô (để màu trắng) (hoặc tô màu dựa trên số lần lặp <span class="math inline">i</span> trước khi <span class="math inline">|z| &gt; 2</span> để tạo ra các hình ảnh Mandelbrot có màu sắc).</li>
+</ul></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/fractal-man-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ex-func.html" class="pagination-link" aria-label="BÀI TẬP HÀM CHẠY TAY">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">BÀI TẬP HÀM CHẠY TAY</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

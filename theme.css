@@ -119,3 +119,12 @@ h2 {
 h3 {
     color: lightblue;
 }
+
+.tcolorbox, .definition, .algorithm {
+    border: 2px solid burlywood;
+    background-color: beige;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px #a79c9c;
+    padding: 10px;
+    margin: 10px
+}
