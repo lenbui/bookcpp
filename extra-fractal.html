@@ -272,6 +272,7 @@ window.Quarto = {
   <li><a href="#tính-chất-hội-tụ" id="toc-tính-chất-hội-tụ" class="nav-link" data-scroll-target="#tính-chất-hội-tụ">Tính chất hội tụ</a></li>
   <li><a href="#thuật-toán-vẽ-tập-mandelbrot" id="toc-thuật-toán-vẽ-tập-mandelbrot" class="nav-link" data-scroll-target="#thuật-toán-vẽ-tập-mandelbrot">Thuật toán vẽ tập Mandelbrot</a></li>
   </ul></li>
+  <li><a href="#tham-khảo" id="toc-tham-khảo" class="nav-link" data-scroll-target="#tham-khảo">Tham khảo</a></li>
   </ul>
 </nav>
     </div>
@@ -586,6 +587,72 @@ window.Quarto = {
 </section>
 <section id="ví-dụ-l-system" class="level3">
 <h3 class="anchored" data-anchor-id="ví-dụ-l-system">Ví dụ L-System</h3>
+<section id="ví-dụ-1" class="level4">
+<h4 class="anchored" data-anchor-id="ví-dụ-1">Ví dụ 1</h4>
+<ul>
+<li>Tiền đề <span class="math inline">s_0 = F++F++F</span></li>
+<li>Tập luật sinh
+<ul>
+<li><span class="math inline">F \to F-F++F-F</span></li>
+</ul></li>
+<li><span class="math inline">\Delta\alpha = 60.0^\circ</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/kock.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+</section>
+<section id="ví-dụ-2" class="level4">
+<h4 class="anchored" data-anchor-id="ví-dụ-2">Ví dụ 2</h4>
+<ul>
+<li>Tiền đề <span class="math inline">s_0 = F</span></li>
+<li>Tập luật sinh
+<ul>
+<li><span class="math inline">F \to FF+[+F-F-F]-[-F+F+F]</span></li>
+</ul></li>
+<li><span class="math inline">\Delta\alpha = 22.5^\circ</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tree-1.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+</section>
+<section id="ví-dụ-3" class="level4">
+<h4 class="anchored" data-anchor-id="ví-dụ-3">Ví dụ 3</h4>
+<ul>
+<li>Tiền đề <span class="math inline">s_0 = X</span></li>
+<li>Tập luật sinh
+<ul>
+<li><span class="math inline">F \to FF</span></li>
+<li><span class="math inline">X \to F[+X]F[-X]+X</span></li>
+</ul></li>
+<li><span class="math inline">\Delta\alpha = 20.0^\circ</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tree-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+</section>
+<section id="ví-dụ-4" class="level4">
+<h4 class="anchored" data-anchor-id="ví-dụ-4">Ví dụ 4</h4>
+<ul>
+<li>Tiền đề <span class="math inline">s_0 = X</span></li>
+<li>Tập luật sinh
+<ul>
+<li><span class="math inline">F \to FF</span></li>
+<li><span class="math inline">X \to F-[[X]+X]+F[+FX]-X</span></li>
+</ul></li>
+<li><span class="math inline">\Delta\alpha = 22.5^\circ</span></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tree-3.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:40.0%"></p>
+</figure>
+</div>
+</section>
 </section>
 </section>
 <section id="tập-mandelbrot" class="level2" data-number="14.4">
@@ -639,9 +706,16 @@ window.Quarto = {
 <p><img src="images/fractal-man-2.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%"></p>
 </figure>
 </div>
-
-
 </section>
+</section>
+<section id="tham-khảo" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="tham-khảo">Tham khảo</h2>
+<ul>
+<li><a href="https://vi.mathigon.org/course/fractals/introduction">Mathigon</a></li>
+<li><a href="https://natureofcode.com/fractals/">The nature of code</a></li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
