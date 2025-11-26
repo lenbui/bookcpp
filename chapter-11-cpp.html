@@ -425,26 +425,28 @@ window.Quarto = {
 <li><p>Phần dừng: <span class="math inline">n=1</span> thì <span class="math inline">A\to C</span></p></li>
 <li><p>Phần đệ qui:</p>
 <ul>
-<li><p>Bước 1: Di chuyển <span class="math inline">n-1</span> đĩa trên cùng từ cọc <span class="math inline">A</span> sang cọc <span class="math inline">B</span>.</p></li>
-<li><p>Bước 2: <span class="math inline">A\to C</span>.</p></li>
-<li><p>Bước 3: Di chuyển <span class="math inline">n-1</span> đĩa trên cùng từ cọc <span class="math inline">B</span> sang cọc <span class="math inline">C</span>.</p></li>
+<li><p>Bước 1: Di chuyển <span class="math inline">n-1</span> đĩa trên cùng từ cọc <span class="math inline">A</span> sang cọc <span class="math inline">C</span>.</p></li>
+<li><p>Bước 2: <span class="math inline">A\to B</span>.</p></li>
+<li><p>Bước 3: Di chuyển <span class="math inline">n-1</span> đĩa trên cùng từ cọc <span class="math inline">C</span> sang cọc <span class="math inline">B</span>.</p></li>
 </ul></li>
 </ul>
+<iframe src="https://1drv.ms/p/c/d9b088e16e36c55a/IQRsfImVfexxT5LaoSidoOTeAbeUGtO0nG44tnFHdHT3ewQ" width="100%" height="450" frameborder="0" scrolling="no">
+</iframe>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Hàm đệ quy giải bài toán Tháp Hà Nội</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> ThapHaNoi<span class="op">(</span><span class="dt">int</span> n<span class="op">,</span> <span class="dt">char</span> A<span class="op">,</span> <span class="dt">char</span> B<span class="op">,</span> <span class="dt">char</span> C<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>n <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Di chuyen dia 1 tu "</span> <span class="op">&lt;&lt;</span> A <span class="op">&lt;&lt;</span> <span class="st">" sang "</span> <span class="op">&lt;&lt;</span> C <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Di chuyen dia 1 tu "</span> <span class="op">&lt;&lt;</span> A <span class="op">&lt;&lt;</span> <span class="st">" sang "</span> <span class="op">&lt;&lt;</span> B <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển n-1 đĩa từ A sang B, lấy C làm trung gian</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển n-1 đĩa từ A sang C, lấy B làm trung gian</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    ThapHaNoi<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> A<span class="op">,</span> C<span class="op">,</span> B<span class="op">);</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển đĩa lớn nhất (đĩa thứ n) từ A sang C</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Di chuyen dia "</span> <span class="op">&lt;&lt;</span> n <span class="op">&lt;&lt;</span> <span class="st">" tu "</span> <span class="op">&lt;&lt;</span> A <span class="op">&lt;&lt;</span> <span class="st">" sang "</span> <span class="op">&lt;&lt;</span> C <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển đĩa lớn nhất (đĩa thứ n) từ A sang B</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="st">"Di chuyen dia "</span> <span class="op">&lt;&lt;</span> n <span class="op">&lt;&lt;</span> <span class="st">" tu "</span> <span class="op">&lt;&lt;</span> A <span class="op">&lt;&lt;</span> <span class="st">" sang "</span> <span class="op">&lt;&lt;</span> B <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển n-1 đĩa từ B sang C, lấy A làm trung gian</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ThapHaNoi<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> B<span class="op">,</span> A<span class="op">,</span> C<span class="op">);</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Di chuyển n-1 đĩa từ C sang B, lấy A làm trung gian</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    ThapHaNoi<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> C<span class="op">,</span> B<span class="op">,</span> A<span class="op">);</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
